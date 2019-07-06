@@ -4,19 +4,18 @@
 #include <unordered_map>
 #include <fstream>
 #include "Stock.h"
-using namespace std;
 
 class StockManager {
-    unordered_map<string,Stock> stocks;
+    std::unordered_map<std::string,Stock> stocks;
 
   public:
-    void addStock(int numShares, int marketCap, string stockName, float openingPrice, float maxPriceVariation);
+    void addStock(int numShares, int marketCap, std::string stockName, float openingPrice, float maxPriceVariation);
     void deleteStock(Stock s);
-    void buyShares(int numShares, string stockName);
-    void sellShares(int numShares, string stockName);
+    void buyShares(int numShares, std::string stockName);
+    void sellShares(int numShares, std::string stockName);
     void setEODStockPrices();
     void loadStockFromFile();
-    void saveGameForAllStocks(fstream& stream);
+    void saveGameForAllStocks(std::fstream& stream) const;
     ~StockManager();
 };
     

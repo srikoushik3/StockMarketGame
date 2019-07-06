@@ -2,12 +2,13 @@
 #define BASICSTOCK_H_
 #include <string>
 #include "Stock.h"
-using namespace std;
 
 class BasicStock : public Stock{
 
   public:
     BasicStock();
+    void setEODStockPrice();
+    float getEODReturns() const;
     ~BasicStock();
 };
     
