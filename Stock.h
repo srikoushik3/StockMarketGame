@@ -20,7 +20,7 @@ class Stock{
     void setMaxVariance(float maxVariance);
     virtual float getEODReturns() const = 0;
     Stock(const json&);
-    json serialize() const;
+    virtual json serialize() const;
     virtual ~Stock();
 };
 

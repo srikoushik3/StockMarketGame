@@ -13,7 +13,7 @@ class Bond : public Stock{
     void setEODStockPrice();
     float getEODReturns() const;
     float getDividendPerShare() const;
-    json serialize() const;
+    json serialize() const override;
     Bond(const json &);
     ~Bond();
 };
