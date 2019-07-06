@@ -1,6 +1,9 @@
 #ifndef STOCK_H_
 #define STOCK_H_
 #include <string>
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class Stock{
     int numShares;
@@ -16,7 +19,9 @@ class Stock{
     virtual void setEODStockPrice() = 0;
     void setMaxVariance(float maxVariance);
     virtual float getEODReturns() const = 0;
+    Stock(const json&);
+    json serialize() const;
     virtual ~Stock();
 };
-    
+
 #endif

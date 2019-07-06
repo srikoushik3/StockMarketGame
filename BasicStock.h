@@ -2,6 +2,9 @@
 #define BASICSTOCK_H_
 #include <string>
 #include "Stock.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class BasicStock : public Stock{
 
@@ -10,6 +13,7 @@ class BasicStock : public Stock{
     void setEODStockPrice();
     float getEODReturns() const;
     ~BasicStock();
+    BasicStock(const json&);
 };
-    
+
 #endif
