@@ -1,11 +1,26 @@
 #include <iostream>
 #include "Bond.h"
+#include "Stock.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 using namespace std;
 
-Bond::Bond() {
+Bond::Bond() {}
 
+Bond::~Bond() {}
+
+void Bond::setEODStockPrice() {}
+float Bond::getEODReturns() const {return 0.0;}
+
+Bond::Bond(const json & j): Stock(j), dividendPerShare(j["dividendPerShare"]) {}
+
+float Bond::getDividendPerShare() const{
+  return dividendPerShare;
 }
 
-Bond::~Bond() {
-
+json Bond::serialize() const {
+  json bondJson = Stock::serialize();
+  bondJson["dividendPerShare"] = dividendPerShare;
+  return bondJson;
 }
