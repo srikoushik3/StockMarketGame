@@ -7,19 +7,24 @@
 using json = nlohmann::json;
 using namespace std;
 
-Stock::Stock() {}
+Stock::Stock() {
+  srand(unsigned(time(NULL)));
+}
 
 void Stock::buyShares(int numSharesPurchased) {
-    numShares -= numSharesPurchased;
+  numShares -= numSharesPurchased;
 }
 
 void Stock::sellShares(int numSharesSold) {
-    numShares += numSharesSold;
+  numShares += numSharesSold;
+}
+
+bool Stock::hasSufficentShares(int numSharesToBePurchased) {
+  return (numShares - numSharesToBePurchased < 0) ? false : true;
 }
 
 void Stock::setEODStockPrice() {
-    srand(unsigned(time(NULL)));
-    openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
+  openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
 }
 
 Stock::~Stock() {}

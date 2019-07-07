@@ -11,7 +11,6 @@ class Bond : public Stock{
   public:
     Bond();
     float getEODReturns() const;
-    float getDividendPerShare() const;
     json serialize() const override;
     Bond(const json &);
     ~Bond();

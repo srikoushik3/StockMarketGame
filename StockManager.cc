@@ -32,6 +32,15 @@ void StockManager::setEODStockPrices() {
 
 }
 
+bool StockManager::hasSufficentShares(int numShares, string stockName) {
+    std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
+    bool res;
+    if (search != stocks.end()) {
+        res = search->second->hasSufficentShares(numShares);
+    }
+    return res;
+}
+
 void StockManager::saveGameForAllStocks(string filename) const{
   json finalJson = json::array();
   for (auto& it: stocks) {

@@ -11,14 +11,10 @@ Bond::Bond() {}
 Bond::~Bond() {}
 
 float Bond::getEODReturns() const {
-  return 0.0;
+  return dividendPerShare;
 }
 
 Bond::Bond(const json & j): Stock(j), dividendPerShare(j["dividendPerShare"]) {}
-
-float Bond::getDividendPerShare() const{
-  return dividendPerShare;
-}
 
 json Bond::serialize() const {
   json bondJson = Stock::serialize();
