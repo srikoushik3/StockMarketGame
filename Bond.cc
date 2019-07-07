@@ -10,8 +10,9 @@ Bond::Bond() {}
 
 Bond::~Bond() {}
 
-void Bond::setEODStockPrice() {}
-float Bond::getEODReturns() const {return 0.0;}
+float Bond::getEODReturns() const {
+  return 0.0;
+}
 
 Bond::Bond(const json & j): Stock(j), dividendPerShare(j["dividendPerShare"]) {}
 

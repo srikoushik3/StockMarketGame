@@ -15,11 +15,17 @@ void StockManager::addStock(int numShares, int marketCap, string name, float ope
 }
 
 void StockManager::buyShares(int numShares, string stockName) {
-
+    std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
+    if (search != stocks.end()) {
+        search->second->buyShares(numShares);
+    }
 }
 
 void StockManager::sellShares(int numShares, string stockName) {
-
+    std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
+    if (search != stocks.end()) {
+        search->second->sellShares(numShares);
+    }
 }
 
 void StockManager::setEODStockPrices() {

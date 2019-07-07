@@ -4,7 +4,6 @@ using namespace std;
 
 BasicStock::BasicStock() {}
 
-void BasicStock::setEODStockPrice() {}
 float BasicStock::getEODReturns() const {
   return 0.0;
 }
