@@ -52,6 +52,7 @@ json Stock::serialize() const {
   {"marketCap", marketCap},
   {"name", name},
   {"openingPricePerShare", openingPricePerShare},
+  {"isBond", false},
   {"maxPriceVariance", maxPriceVariance}};
   return stockJson;
 }

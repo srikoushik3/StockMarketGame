@@ -22,5 +22,6 @@ float Bond::getDividendPerShare() const{
 json Bond::serialize() const {
   json bondJson = Stock::serialize();
   bondJson["dividendPerShare"] = dividendPerShare;
+  bondJson["isBond"] = true;
   return bondJson;
 }
