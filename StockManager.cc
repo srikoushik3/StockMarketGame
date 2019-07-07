@@ -26,17 +26,17 @@ void StockManager::setEODStockPrices() {
 
 }
 
-void StockManager::saveGameForAllStocks() const{
+void StockManager::saveGameForAllStocks(string filename) const{
   json finalJson = json::array();
   for (auto& it: stocks) {
       finalJson.emplace_back(it.second->serialize());
   }
-  ofstream o("stocks.json");
+  ofstream o(filename);
   o << setw(4) << finalJson << endl;
 }
 
-void StockManager::loadStocksFromFile() {
-  ifstream i("stocks.json");
+void StockManager::loadStocksFromFile(string filename) {
+  ifstream i(filename);
   json stocksJson;
   i >> stocksJson;
   for (json::iterator it = stocksJson.begin(); it != stocksJson.end(); ++it) {
