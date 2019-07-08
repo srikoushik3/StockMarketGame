@@ -34,26 +34,22 @@ void StockManager::setEODStockPrices() {
 
 bool StockManager::hasSufficentShares(int numShares, string stockName) {
     std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
-    bool res;
+    bool res = false;
     if (search != stocks.end()) {
         res = search->second->hasSufficentShares(numShares);
     }
     return res;
 }
 
-void StockManager::saveGameForAllStocks(string filename) const{
+json StockManager::saveGameForAllStocks() const{
   json finalJson = json::array();
   for (auto& it: stocks) {
       finalJson.emplace_back(it.second->serialize());
   }
-  ofstream o(filename);
-  o << setw(4) << finalJson << endl;
+  return finalJson;
 }
 
-void StockManager::loadStocksFromFile(string filename) {
-  ifstream i(filename);
-  json stocksJson;
-  i >> stocksJson;
+void StockManager::loadStocksFromFile(json & stocksJson) {
   for (json::iterator it = stocksJson.begin(); it != stocksJson.end(); ++it) {
     json currentStock = *it;
     bool isBond = currentStock["isBond"];
