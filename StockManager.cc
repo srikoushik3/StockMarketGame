@@ -14,6 +14,7 @@ void StockManager::addStock(int numShares, int marketCap, string name, float ope
 
 }
 
+// Search for stock in map and call buyShares function on that stock
 void StockManager::buyShares(int numShares, string stockName) {
     std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
     if (search != stocks.end()) {
@@ -21,6 +22,7 @@ void StockManager::buyShares(int numShares, string stockName) {
     }
 }
 
+// Search for stock in map and call sellShares function on that stock
 void StockManager::sellShares(int numShares, string stockName) {
     std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
     if (search != stocks.end()) {
@@ -28,19 +30,25 @@ void StockManager::sellShares(int numShares, string stockName) {
     }
 }
 
+// Iterate through all stocks in map and call setEODStockPrice function on each stock
 void StockManager::setEODStockPrices() {
-
+    for (auto it = stocks.begin(); it != stocks.end(); ++it) {
+        it->second->setEODStockPrice();
+    }
 }
-
+// Search for stock in map and call hasSufficentShares function on that stock
+// Return true if enough stocks available, else return false
 bool StockManager::hasSufficentShares(int numShares, string stockName) {
     std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
-    bool res;
+    bool res = false;
     if (search != stocks.end()) {
         res = search->second->hasSufficentShares(numShares);
     }
     return res;
 }
 
+// Called when game is saved.
+// Iterates through all stocks in map and stores information into JSON file
 void StockManager::saveGameForAllStocks(string filename) const{
   json finalJson = json::array();
   for (auto& it: stocks) {
@@ -50,6 +58,8 @@ void StockManager::saveGameForAllStocks(string filename) const{
   o << setw(4) << finalJson << endl;
 }
 
+// Called when game needs to be loaded.
+// Iterates through all fields in the JSON file and inserts information to stocks map
 void StockManager::loadStocksFromFile(string filename) {
   ifstream i(filename);
   json stocksJson;
