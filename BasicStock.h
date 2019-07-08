@@ -10,7 +10,6 @@ class BasicStock : public Stock{
 
   public:
     BasicStock();
-    void setEODStockPrice();
     float getEODReturns() const;
     ~BasicStock();
     BasicStock(const json&);

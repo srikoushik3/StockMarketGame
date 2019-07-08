@@ -14,6 +14,7 @@ class StockManager {
     void buyShares(int numShares, std::string stockName);
     void sellShares(int numShares, std::string stockName);
     void setEODStockPrices();
+    bool hasSufficentShares(int numShares, std::string stockName);
     void loadStocksFromFile(std::string);
     void saveGameForAllStocks(std::string) const;
     ~StockManager();

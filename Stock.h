@@ -16,8 +16,8 @@ class Stock{
     Stock();
     void buyShares(int numShares);
     void sellShares(int numShares);
-    virtual void setEODStockPrice() = 0;
-    void setMaxVariance(float maxVariance);
+    bool hasSufficentShares(int numShares);
+    void setEODStockPrice();
     virtual float getEODReturns() const = 0;
     Stock(const json&);
     virtual json serialize() const;

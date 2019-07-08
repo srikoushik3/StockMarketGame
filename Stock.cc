@@ -1,4 +1,6 @@
 #include <iostream>
+#include<ctime>
+#include<cstdlib>
 #include "Stock.h"
 #include "json.hpp"
 
@@ -6,19 +8,23 @@ using json = nlohmann::json;
 using namespace std;
 
 Stock::Stock() {
-
+  srand(unsigned(time(NULL)));
 }
 
-void Stock::buyShares(int numShares) {
-
+void Stock::buyShares(int numSharesPurchased) {
+  numShares -= numSharesPurchased;
 }
 
-void Stock::sellShares(int numShares) {
-
+void Stock::sellShares(int numSharesSold) {
+  numShares += numSharesSold;
 }
 
-void Stock::setMaxVariance(float maxVariance) {
+bool Stock::hasSufficentShares(int numSharesToBePurchased) {
+  return (numShares - numSharesToBePurchased < 0) ? false : true;
+}
 
+void Stock::setEODStockPrice() {
+  openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
 }
 
 Stock::~Stock() {}
