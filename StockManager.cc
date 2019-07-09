@@ -29,7 +29,9 @@ void StockManager::sellShares(int numShares, string stockName) {
 }
 
 void StockManager::setEODStockPrices() {
-
+    for(auto& it: stocks){
+        it.second->setEODStockPrice();
+    }
 }
 
 bool StockManager::hasSufficentShares(int numShares, string stockName) {
