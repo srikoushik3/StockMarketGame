@@ -5,16 +5,20 @@
 #include <iostream>
 using namespace std;
 
-User::User(string username): username{username}, cashBalance{1000} {
-  Portfolio portfolio;
-}
+// change the initial cash balance
+User::User(string username): username{username}, cashBalance{1000} {}
 
 User::~User(){}
 
 void User::addShares(string stockName, int numShares, float currentStockValue){
   // subtract the stock purchase cost from cash balance
-  cashBalance -= numShares*currentStockValue;
-  portfolio.addShares(stockName, numShares, currentStockValue);
+  if (numShares*currentStockValue <= cashBalance){
+    cashBalance -= numShares*currentStockValue;
+    portfolio.addShares(stockName, numShares, currentStockValue);
+  }
+  else{
+    //throw NotEnoughCashForTransaction exception
+  }
 }
 
 void User::removeShares(string stockName, int numShares, float currentStockValue){

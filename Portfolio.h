@@ -9,7 +9,6 @@ class Portfolio {
   // dict of stockName: (numShares, bookValue)
   std::unordered_map<std::string, std::tuple<int, float>> stocksPurchased;
   float profit;
-  std::vector<float> transactionHist;
   public:
     Portfolio();
     //Portfolio(json&);
