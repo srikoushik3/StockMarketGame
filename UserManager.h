@@ -1,19 +1,20 @@
 #include "User.h"
 #include <memory>
 #include <string>
+#include <fstream>
 #include <unordered_map>
 
 class UserManager{
-  std::unordered_map<string, unique_ptr<User>> users;
+  // map of username to ptr to User objects
+  std::unordered_map<std::string, std::unique_ptr<User>> users;
+  void addUser(std::string);
   public:
     UserManager();
-    void addUser(std::string);
-    void removeUser(std::string);
+    //void removeUser(std::string);
     void SaveGameForAllUsers();
-    void loadUsersFromFile(fstream&);
-    void addShares(string, int, float);
-    void removeShares(string, int, float);
-    // ??? getUsers -> why return all User objects?
+    void loadUsersFromFile(std::fstream&);
+    void addShares(std::string, std::string, int, float);
+    void removeShares(std::string, std::string, int, float);
     std::vector<User> getUsers();
-    void createUsersFromUsername(std::vector<string>);
+    void createUsersFromUsername(std::vector<std::string>);
 };

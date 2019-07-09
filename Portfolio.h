@@ -7,16 +7,10 @@
 
 class Portfolio {
   // dict of stockName: (numShares, bookValue)
-  std::unordered_map<std::string,tuple<int, float>> stocksPurchased;
+  std::unordered_map<std::string, std::tuple<int, float>> stocksPurchased;
   float profit;
   std::vector<float> transactionHist;
   public:
-    /*
-    +addShares(stockName: string, numShares: int, currentStockValue: float): void
-    +removeShares(stockName: string, numShares: int, currentStockValue: float): void
-    +getPortfolioStocks(): map<ShareMap>
-    +Portfolio(portfolio: json): void
-    */
     Portfolio();
     //Portfolio(json&);
     void addShares(std::string, int, float);

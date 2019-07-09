@@ -1,21 +1,20 @@
 #ifndef USER_H
 #define USER_H
+#include "Portfolio.h"
 #include <string>
 #include <memory>
 
 class User {
   std::string username;
-  std::unique_ptr<Portfolio> portfolio;
+  Portfolio portfolio;
   float cashBalance;
   public:
     User(std::string);
-    getPortfolio(){
-      return *portfolio;
-    }
+    Portfolio getPortfolio();
     //saveUserState();
     //User(json&);
-    void addShares(string, int, float);
-    void removeShares(string, int, float);
+    void addShares(std::string, int, float);
+    void removeShares(std::string, int, float);
     ~User();
 };
 
