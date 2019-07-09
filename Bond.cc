@@ -10,6 +10,7 @@ Bond::Bond() {}
 
 Bond::~Bond() {}
 
+// Returns dividendPerShare since Bonds offer dividends
 float Bond::getEODReturns() const {
   return dividendPerShare;
 }
