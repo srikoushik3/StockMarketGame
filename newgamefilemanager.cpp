@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <sstream>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -13,26 +14,19 @@ using namespace std;
 NewGameFileManager::NewGameFileManager(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NewGameFileManager),
-    numUsers(0), daysPerTurn(0), totalDays(0), stocksFileName("stocks.json")
+    daysPerTurn(0), totalDays(0), stocksFileName("stocks.json")
 {
     //Set Labels to 0
     ui->setupUi(this);
-    ui->numUsersLbl->setText("0");
     ui->daysLbl->setText("0");
     ui->totalDaysLbl->setText("0");
     ui->errorLabel->setText("");
+    ui->usernameLbl->setText("");
 }
 
 NewGameFileManager::~NewGameFileManager()
 {
     delete ui;
-}
-
-void NewGameFileManager::on_numUsersBtn_clicked()
-{
-    //Save number of users
-    numUsers = QInputDialog::getInt(this, "Number of Users", "Enter Number of Users");
-    ui->numUsersLbl->setText(QString::number(numUsers));
 }
 
 void NewGameFileManager::on_daysPerTurnBtn_clicked()
@@ -58,7 +52,7 @@ void NewGameFileManager::on_importStocksBtn_clicked()
 void NewGameFileManager::on_submitBtn_clicked()
 {
      // Make sure no fields are empty
-    if(numUsers == 0 || daysPerTurn == 0 || totalDays == 0 || stocksFileName == ""){
+    if(usernames.size() == 0 || daysPerTurn <= 0 || totalDays <= 0 || stocksFileName == ""){
         ui->errorLabel->setText("Please Enter a Value for All Fields");
         return;
     }
@@ -70,4 +64,17 @@ void NewGameFileManager::on_submitBtn_clicked()
         ifs >> stocksJson;
         QApplication::quit();
     }
+}
+
+void NewGameFileManager::on_usernameBtn_clicked()
+{
+    string usernameStr = QInputDialog::getText(this, "Usernames", "Enter Usernames (Comma Seperated)").toStdString();
+    stringstream stream(usernameStr);
+    string word;
+    this->usernames.clear();
+    //Adds comma seperated usernames to usernames vector
+    while( getline(stream, word, ',') ){
+        this->usernames.emplace_back(word);
+    }
+    ui->usernameLbl->setText(QString::fromStdString(usernameStr));
 }

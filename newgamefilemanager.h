@@ -16,7 +16,6 @@ public:
     ~NewGameFileManager();
 
 private slots:
-    void on_numUsersBtn_clicked();
 
     void on_daysPerTurnBtn_clicked();
 
@@ -26,9 +25,12 @@ private slots:
 
     void on_submitBtn_clicked();
 
+    void on_usernameBtn_clicked();
+
 private:
     Ui::NewGameFileManager *ui;
-    int numUsers, daysPerTurn, totalDays;
+    int daysPerTurn, totalDays;
+    std::vector<std::string> usernames;
     std::string stocksFileName;
 };
 

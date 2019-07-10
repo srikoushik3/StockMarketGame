@@ -10,11 +10,12 @@ INCLUDEPATH += .
 QT += widgets
 HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
     mainwindow.h \
-    newgamefilemanager.h
+    newgamefilemanager.h User.h Portfolio.h
 SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
     mainwindow.cpp \
     main.cc \
-    newgamefilemanager.cpp
+    newgamefilemanager.cpp \
+    User.cc Portfolio.cc \
 
 FORMS += \
     mainwindow.ui \
