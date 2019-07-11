@@ -33,7 +33,7 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     // stock exists
     if(get<0>(it->second) < numShares){
       // throw SellingMoreThanOwnedShares Exception
-      throw UserException{"Selling More Than Owned Shares"};
+      throw UserException{"Selling More Shares than Owned"};
     }
     int oldNumShares = get<0>(it->second);
     float oldBookValue = get<1>(it->second);

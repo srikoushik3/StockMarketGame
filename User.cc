@@ -20,7 +20,7 @@ void User::addShares(string stockName, int numShares, float currentStockValue){
   }
   else{
     // throw NotEnoughCashForTransaction exception
-    throw UserException{"Not Enough Cash For Transaction"};
+    throw UserException{"Not Enough Money For Transaction"};
   }
 }
 

@@ -19,7 +19,7 @@ void StockManager::addStock(int numShares, int marketCap, string name, float ope
     }
     else{
         // throw DuplicateStock exception
-        throw StockException{"Duplicate Stock"};
+        throw StockException{"Stock Already Exists"};
     }
 }
 

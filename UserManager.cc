@@ -49,7 +49,7 @@ void UserManager::removeShares(string stockName, string username, int numShares,
   }
   else{
     // throw UserDoesNotExistException
-    throw UserException{"User Does Not Exist"};
+    throw UserException{"Username Already Exists"};
   }
 }
 
