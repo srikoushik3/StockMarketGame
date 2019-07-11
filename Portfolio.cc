@@ -5,6 +5,8 @@
 #include <utility>
 #include <iostream>
 #include "Portfolio.h"
+#include "Exception.h"
+
 using namespace std;
 
 Portfolio::Portfolio(): profit{0.0} {}
@@ -31,6 +33,7 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     // stock exists
     if(get<0>(it->second) < numShares){
       // throw SellingMoreThanOwnedShares Exception
+      throw UserException{"Selling More Than Owned Shares"};
     }
     int oldNumShares = get<0>(it->second);
     float oldBookValue = get<1>(it->second);
@@ -48,6 +51,7 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
   }
   else{
     // throw StockDoesNotExistInPortfolio Exception
+    throw UserException{"Stock Does Not Exist In Portfolio"};
   }
 }
 // return all the stocks in the portfolio (map of stockName : numShares)

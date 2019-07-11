@@ -6,12 +6,21 @@
 #include "BasicStock.h"
 #include "Bond.h"
 #include "json.hpp"
+#include "Exception.h"
 
 using json = nlohmann::json;
 using namespace std;
 
 void StockManager::addStock(int numShares, int marketCap, string name, float openingPrice, float maxPriceVariation) {
-
+    // if Stock DNE -> add stock
+    if(stocks.find(name) == stocks.end()){
+        // new stock
+        stocks.insert(make_pair(name, make_unique<Stock>(name)));
+    }
+    else{
+        // throw DuplicateStock exception
+        throw StockException{"Duplicate Stock"};
+    }
 }
 
 // Search for stock in map and call buyShares function on that stock
@@ -20,6 +29,10 @@ void StockManager::buyShares(int numShares, string stockName) {
     if (search != stocks.end()) {
         search->second->buyShares(numShares);
     }
+    else {
+        // throw StockDoesNotExistException
+        throw StockException{"Stock Does Not Exist"};
+    }
 }
 
 // Search for stock in map and call sellShares function on that stock
@@ -27,6 +40,10 @@ void StockManager::sellShares(int numShares, string stockName) {
     std::unordered_map<std::string,std::unique_ptr<Stock>>::const_iterator search = stocks.find(stockName);
     if (search != stocks.end()) {
         search->second->sellShares(numShares);
+    }
+    else {
+        // throw StockDoesNotExistException
+        throw StockException{"Stock Does Not Exist"};
     }
 }
 

@@ -3,6 +3,8 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include "Exception.h"
+
 using namespace std;
 
 // change the initial cash balance
@@ -17,7 +19,8 @@ void User::addShares(string stockName, int numShares, float currentStockValue){
     portfolio.addShares(stockName, numShares, currentStockValue);
   }
   else{
-    //throw NotEnoughCashForTransaction exception
+    // throw NotEnoughCashForTransaction exception
+    throw UserException{"Not Enough Cash For Transaction"};
   }
 }
 

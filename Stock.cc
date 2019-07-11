@@ -3,6 +3,7 @@
 #include<cstdlib>
 #include "Stock.h"
 #include "json.hpp"
+#include "Exception.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -15,7 +16,13 @@ Stock::Stock() {
 // buyShares is called by buyShares in StockManager Class
 // Removes the stocks bought from the number of stocks available
 void Stock::buyShares(int numSharesPurchased) {
-  numShares -= numSharesPurchased;
+  if (numShares - numSharesPurchased < 0) {
+    numShares -= numSharesPurchased;
+  }
+  else{
+    //throw NotEnoughSharesForTransaction exception
+    throw StockException{"Not Enough Shares For Transaction"};
+  }
 }
 
 // sellShares is called by sellShares in StockManager Class
