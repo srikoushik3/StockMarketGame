@@ -5,6 +5,8 @@
 #include <string>
 #include <memory>
 #include "Stock.h"
+#include "json.hpp"
+using json = nlohmann::json;
 
 class StockManager {
     std::unordered_map<std::string,std::unique_ptr<Stock>> stocks;
@@ -15,8 +17,8 @@ class StockManager {
     void sellShares(int numShares, std::string stockName);
     void setEODStockPrices();
     bool hasSufficentShares(int numShares, std::string stockName);
-    void loadStocksFromFile(std::string);
-    void saveGameForAllStocks(std::string) const;
+    void loadStocksFromFile(json &);
+    json saveGameForAllStocks() const;
     ~StockManager();
 };
 

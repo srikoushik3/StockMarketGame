@@ -32,8 +32,8 @@ void StockManager::sellShares(int numShares, string stockName) {
 
 // Iterate through all stocks in map and call setEODStockPrice function on each stock
 void StockManager::setEODStockPrices() {
-    for (auto it = stocks.begin(); it != stocks.end(); ++it) {
-        it->second->setEODStockPrice();
+    for(auto& it: stocks){
+        it.second->setEODStockPrice();
     }
 }
 // Search for stock in map and call hasSufficentShares function on that stock
@@ -49,21 +49,17 @@ bool StockManager::hasSufficentShares(int numShares, string stockName) {
 
 // Called when game is saved.
 // Iterates through all stocks in map and stores information into JSON file
-void StockManager::saveGameForAllStocks(string filename) const{
+json StockManager::saveGameForAllStocks() const{
   json finalJson = json::array();
   for (auto& it: stocks) {
       finalJson.emplace_back(it.second->serialize());
   }
-  ofstream o(filename);
-  o << setw(4) << finalJson << endl;
+  return finalJson;
 }
 
 // Called when game needs to be loaded.
 // Iterates through all fields in the JSON file and inserts information to stocks map
-void StockManager::loadStocksFromFile(string filename) {
-  ifstream i(filename);
-  json stocksJson;
-  i >> stocksJson;
+void StockManager::loadStocksFromFile(json & stocksJson) {
   for (json::iterator it = stocksJson.begin(); it != stocksJson.end(); ++it) {
     json currentStock = *it;
     bool isBond = currentStock["isBond"];
