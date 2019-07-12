@@ -3,15 +3,14 @@
 
 #include "UserManager.h"
 #include "StockManager.h"
-#include "decorator.h"
 #include <memory>
 
 
 class GameStateManager
 {
 public:
-    friend class Decorator;
     GameStateManager();
+    GameStateManager(std::shared_ptr<GameStateManager>);
     virtual ~GameStateManager() = 0;
 protected:
     std::shared_ptr<UserManager> userManager;

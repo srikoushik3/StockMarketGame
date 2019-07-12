@@ -7,9 +7,9 @@
 
 class Decorator: public GameStateManager{
     protected:
-        std::shared_ptr<Decorator> gsm;
+        std::shared_ptr<GameStateManager> gsm;
     public:
-        Decorator(std::shared_ptr<Decorator>);
+        Decorator(std::shared_ptr<GameStateManager>);
         ~Decorator(){}
 };
 
