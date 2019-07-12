@@ -4,7 +4,9 @@
 #include <string>
 #include <iostream>
 #include "Exception.h"
+#include "json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 // change the initial cash balance
@@ -32,4 +34,26 @@ void User::removeShares(string stockName, int numShares, float currentStockValue
 
 Portfolio User::getPortfolio(){
   return portfolio;
+}
+
+/*
+  Expected JSON Input:
+  "userName": <string>,
+  "cashBalance": <int>,
+  "portfolio": <portfolio>
+*/
+User::User(const json& j) : username(j["userName"]), cashBalance(j["cashBalance"]), portfolio(Portfolio(j["portfolio"])){}
+
+/*
+  Expected JSON Output:
+  "userName": <string>,
+  "cashBalance": <int>,
+  "portfolio": <portfolio>
+*/
+json User::serialize() const {
+  json userJson;
+  userJson["userName"] = username;
+  userJson["cashBalance"] = cashBalance;
+  userJson["portfolio"] = portfolio.serialize();
+  return userJson;
 }

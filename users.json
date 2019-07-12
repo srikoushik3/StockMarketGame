@@ -1,0 +1,16 @@
+[
+    {
+        "userName": "CS247",
+        "cashBalance": 123,
+        "portfolio":{
+            "profit": 123,
+            "stocks":[
+                {
+                    "stockName": "abc",
+                    "numShares": 123,
+                    "bookValue": 1234
+                }
+            ]
+        }
+    }
+]
