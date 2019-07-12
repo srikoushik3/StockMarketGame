@@ -28,7 +28,6 @@ NewGameFileManager::NewGameFileManager(shared_ptr<GameStateManager> gsm, QWidget
     this->gsm = make_shared<NewGameState>(gsm);
 }
 
-}
 NewGameFileManager::~NewGameFileManager()
 {
     delete ui;

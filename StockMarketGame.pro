@@ -11,17 +11,20 @@ QT += widgets
 HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
     mainwindow.h \
     newgamefilemanager.h User.h Portfolio.h \
-    newgamestate.h
+    gamestatemanager.h \
+    gamestatebase.h UserManager.h \
+    decorator.h \
+    newgamestate.h gamerun.h
 SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
     mainwindow.cpp \
     main.cc \
+    newgamefilemanager.cpp \
     User.cc Portfolio.cc \
     gamestatemanager.cpp \
     gamestatebase.cpp UserManager.cc \
     decorator.cpp \
-    newgamestate.cpp
+    newgamestate.cpp gamerun.cpp
 
 FORMS += \
     mainwindow.ui \
-    newgamefilemanager.ui \
-    gamerun.ui
+    newgamefilemanager.ui gamerun.ui
