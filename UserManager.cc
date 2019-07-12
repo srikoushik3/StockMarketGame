@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include "Exception.h"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ void UserManager::addUser(string username){
   }
   else{
     // throw DuplicateUsername exception
+    throw UserException{"Duplicate Username"};
   }
 }
 
@@ -34,7 +36,8 @@ void UserManager::addShares(string stockName, string username, int numShares, fl
     users[username]->addShares(stockName, numShares, currentStockValue);
   }
   else{
-    // throw UserDoesNotExistsException
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
   }
 }
 
@@ -45,7 +48,8 @@ void UserManager::removeShares(string stockName, string username, int numShares,
     users[username]->removeShares(stockName, numShares, currentStockValue);
   }
   else{
-    // throw UserDoesNotExistsException
+    // throw UserDoesNotExistException
+    throw UserException{"Username Already Exists"};
   }
 }
 
