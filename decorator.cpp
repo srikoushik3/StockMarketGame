@@ -3,7 +3,4 @@
 
 using namespace std;
 
-Decorator::Decorator(shared_ptr<Decorator> gsm): gsm(gsm){
-    this->stockManager = gsm->stockManager;
-    this->userManager= gsm->userManager;
-}
+Decorator::Decorator(shared_ptr<GameStateManager> gsm): gsm(gsm), GameStateManager(gsm){}
