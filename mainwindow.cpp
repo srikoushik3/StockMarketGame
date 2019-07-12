@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "newgamefilemanager.h"
+#include "gamerun.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,7 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    NewGameFileManager fm;
+    gamerun fm;
     this->hide();
     fm.setModal(true);
     fm.exec();

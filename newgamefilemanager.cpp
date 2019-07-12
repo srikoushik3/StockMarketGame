@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <sstream>
 #include "json.hpp"
+#include "gamerun.h"
 
 using json = nlohmann::json;
 
@@ -22,8 +23,8 @@ NewGameFileManager::NewGameFileManager(QWidget *parent) :
     ui->totalDaysLbl->setText("0");
     ui->errorLabel->setText("");
     ui->usernameLbl->setText("");
-}
 
+}
 NewGameFileManager::~NewGameFileManager()
 {
     delete ui;
@@ -62,7 +63,10 @@ void NewGameFileManager::on_submitBtn_clicked()
         std::ifstream ifs(stocksFileName);
         json stocksJson;
         ifs >> stocksJson;
-        QApplication::quit();
+        gamerun gr;
+        this->hide();
+        gr.setModal(true);
+        gr.exec();
     }
 }
 
