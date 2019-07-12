@@ -2,6 +2,8 @@
 #define NEWGAMEFILEMANAGER_H
 
 #include <QDialog>
+#include <memory>
+#include "newgamestate.h"
 
 namespace Ui {
 class NewGameFileManager;
@@ -12,7 +14,7 @@ class NewGameFileManager : public QDialog
     Q_OBJECT
 
 public:
-    explicit NewGameFileManager(QWidget *parent = 0);
+    explicit NewGameFileManager(std::shared_ptr<GameStateManager>, QWidget *parent = 0);
     ~NewGameFileManager();
 
 private slots:
@@ -32,6 +34,7 @@ private:
     int daysPerTurn, totalDays;
     std::vector<std::string> usernames;
     std::string stocksFileName;
+    std::shared_ptr<NewGameState> gsm;
 };
 
 #endif // NEWGAMEFILEMANAGER_H

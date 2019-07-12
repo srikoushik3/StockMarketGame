@@ -1,9 +1,11 @@
 #include "newgamefilemanager.h"
 #include "ui_newgamefilemanager.h"
+#include "gamestatemanager.h"
 #include <fstream>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <memory>
 #include <sstream>
 #include "json.hpp"
 
@@ -11,7 +13,7 @@ using json = nlohmann::json;
 
 using namespace std;
 
-NewGameFileManager::NewGameFileManager(QWidget *parent) :
+NewGameFileManager::NewGameFileManager(shared_ptr<GameStateManager> gsm, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NewGameFileManager),
     daysPerTurn(0), totalDays(0), stocksFileName("stocks.json")
@@ -22,6 +24,7 @@ NewGameFileManager::NewGameFileManager(QWidget *parent) :
     ui->totalDaysLbl->setText("0");
     ui->errorLabel->setText("");
     ui->usernameLbl->setText("");
+    this->gsm = make_shared<NewGameState>(gsm);
 }
 
 NewGameFileManager::~NewGameFileManager()
@@ -49,6 +52,19 @@ void NewGameFileManager::on_importStocksBtn_clicked()
     stocksFileName = QFileDialog::getOpenFileName(this, tr("Open File"), "C://", "Json File(*.json)").toStdString();
 }
 
+void NewGameFileManager::on_usernameBtn_clicked()
+{
+    string usernameStr = QInputDialog::getText(this, "Usernames", "Enter Usernames (Comma Seperated)").toStdString();
+    stringstream stream(usernameStr);
+    string word;
+    this->usernames.clear();
+    //Adds comma seperated usernames to usernames vector
+    while( getline(stream, word, ',') ){
+        this->usernames.emplace_back(word);
+    }
+    ui->usernameLbl->setText(QString::fromStdString(usernameStr));
+}
+
 void NewGameFileManager::on_submitBtn_clicked()
 {
      // Make sure no fields are empty
@@ -62,19 +78,8 @@ void NewGameFileManager::on_submitBtn_clicked()
         std::ifstream ifs(stocksFileName);
         json stocksJson;
         ifs >> stocksJson;
+        this->gsm->createStocksFromFile(stocksJson);
+        this->gsm->createUsers(usernames);
         QApplication::quit();
     }
-}
-
-void NewGameFileManager::on_usernameBtn_clicked()
-{
-    string usernameStr = QInputDialog::getText(this, "Usernames", "Enter Usernames (Comma Seperated)").toStdString();
-    stringstream stream(usernameStr);
-    string word;
-    this->usernames.clear();
-    //Adds comma seperated usernames to usernames vector
-    while( getline(stream, word, ',') ){
-        this->usernames.emplace_back(word);
-    }
-    ui->usernameLbl->setText(QString::fromStdString(usernameStr));
 }
