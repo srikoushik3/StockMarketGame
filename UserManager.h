@@ -1,3 +1,6 @@
+#ifndef USERMANAGER_H
+#define USERMANAGER_H
+
 #include "User.h"
 #include <memory>
 #include <string>
@@ -18,3 +21,5 @@ class UserManager{
     std::vector<User> getUsers();
     void createUsersFromUsername(std::vector<std::string>);
 };
+
+#endif
