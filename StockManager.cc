@@ -55,6 +55,18 @@ void StockManager::setEODStockPrices() {
         it.second->setEODStockPrice();
     }
 }
+
+// get current stock price
+float StockManager::getEODStockPrice(string stockName){
+  if (stocks.find(stockName) != stocks.end()) {
+    // stock found, return the price
+    return stocks[stockName]->getEODStockPrice();
+  }
+  else{
+    // throw StockDoesNotExistException
+    throw StockException{"Stock Does Not Exist"};
+  }
+}
 // Search for stock in map and call hasSufficentShares function on that stock
 // Return true if enough stocks available, else return false
 bool StockManager::hasSufficentShares(int numShares, string stockName) {

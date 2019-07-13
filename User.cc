@@ -30,6 +30,10 @@ void User::removeShares(string stockName, int numShares, float currentStockValue
   portfolio.removeShares(stockName, numShares, currentStockValue);
 }
 
+void User::addDividends(float totalDividends){
+  cashBalance += totalDividends;
+}
+
 Portfolio User::getPortfolio(){
   return portfolio;
 }

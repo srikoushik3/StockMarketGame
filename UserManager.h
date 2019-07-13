@@ -20,6 +20,8 @@ class UserManager{
     void removeShares(std::string, std::string, int, float);
     std::vector<User> getUsers();
     void createUsersFromUsername(std::vector<std::string>);
+    void addDividendsToUser(float, string);
+    unordered_map<string, tuple<int, float>> getUserPortfolioInfo(string);
 };
 
 #endif
