@@ -2,6 +2,10 @@
 #include "gamestatemanager.h"
 #include <memory>
 #include <string>
+#include <tuple>
+#include <map>
+#include <vector>
+
 
 /*
 +buyStockCurrentUser(numShare: int, stockName: string): void
@@ -12,19 +16,19 @@
 */
 
 class GameRun: public Decorator{
-  vector<string> usernames;
+  std::vector<std::string> usernames;
   int currentTurn;
   int currentDay;
   int daysPerTurn;
   int totalDays;
-  string getTurn();
+  std::string getTurn();
   public:
     GameRun(std::shared_ptr<GameStateManager>, int, int);
-    void buyStockCurrentUser(int, string);
-    void sellStockCurrentUser(int, string);
+    void buyStockCurrentUser(int, std::string);
+    void sellStockCurrentUser(int, std::string);
     void skipNextDayForCurrentUser();
-    tuple<string, float, float, int> getCurrentUserInformation();
-    map<string, tuple<int, float float>> getCurrentUserStockInfo();
+    std::tuple<std::string, float, float, int> getCurrentUserInformation();
+    std::map<std::string, std::tuple<int, float, float>> getCurrentUserStockInfo();
     std::vector<float> getHistoricalUserProfits();
     std::vector<std::string> getAllAvailableStocks();
     ~GameRun();

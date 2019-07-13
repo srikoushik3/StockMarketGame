@@ -21,6 +21,7 @@ class StockManager {
     void loadStocksFromFile(json &);
     json saveGameForAllStocks() const;
     std::vector<std::string> getAllAvailableStocks();
+    float getEODReturns(std::string stockName);
     ~StockManager();
 };
 

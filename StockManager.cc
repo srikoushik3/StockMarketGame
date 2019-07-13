@@ -112,4 +112,15 @@ vector<string> StockManager::getAllAvailableStocks(){
   return stocksAvail;
 }
 
+float StockManager::getEODReturns(string stockName){
+  if (stocks.find(stockName) != stocks.end()) {
+    // stock found, return the dividend returns
+    return stocks[stockName]->getEODReturns();
+  }
+  else{
+    // throw StockDoesNotExistException
+    throw StockException{"Stock Does Not Exist"};
+  }
+}
+
 StockManager::~StockManager(){}

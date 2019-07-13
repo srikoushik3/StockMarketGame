@@ -115,7 +115,7 @@ float UserManager::getUserProfits(string username){
   }
 }
 
-vector<float> getHistoricalUserProfits(string username){
+vector<float> UserManager::getHistoricalUserProfits(string username){
   if(users.find(username) != users.end()){
     // valid user
     return users[username]->getHistoricalProfits();

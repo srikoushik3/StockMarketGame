@@ -64,13 +64,17 @@ map<string, tuple<int, float>> Portfolio::getPortfolioInfo(){
   int numShares;
   float avgPurchasePrice;
   for(auto& it: stocksPurchased){
-    numShares = get<0>(it->second);
+    numShares = get<0>(it.second);
     // avgPurchasePrice is (bookvalue of stock) / (num of shares owned)
-    avgPurchasePrice = get<1>(it->second)/get<0>(it->second);
-    portfolioInfo.insert(make_pair(it->first, make_tuple(numShares, avgPurchasePrice));
+    avgPurchasePrice = get<1>(it.second)/get<0>(it.second);
+    portfolioInfo.insert(make_pair(it.first, make_tuple(numShares, avgPurchasePrice)));
   }
 }
 
-float getProfit(){
+float Portfolio::getProfit(){
     return profit;
+}
+
+vector<float> Portfolio::getHistoricalProfits(){
+  return historicalProfits;
 }

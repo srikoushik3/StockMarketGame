@@ -14,7 +14,8 @@ HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
     gamestatemanager.h \
     gamestatebase.h UserManager.h \
     decorator.h \
-    newgamestate.h
+    newgamestate.h \
+    Gamerun.h
 SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
     mainwindow.cpp \
     main.cc \
@@ -23,7 +24,8 @@ SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
     gamestatemanager.cpp \
     gamestatebase.cpp UserManager.cc \
     decorator.cpp \
-    newgamestate.cpp
+    newgamestate.cpp \
+    Gamerun.cc
 
 FORMS += \
     mainwindow.ui \

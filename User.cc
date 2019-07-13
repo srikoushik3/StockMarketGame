@@ -51,5 +51,5 @@ float User::getProfits(){
 }
 
 vector<float> User::getHistoricalProfits(){
-  return portfolio.historicalProfits();
+  return portfolio.getHistoricalProfits();
 }

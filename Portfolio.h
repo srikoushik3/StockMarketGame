@@ -19,7 +19,7 @@ class Portfolio {
     // return all the stocks in the portfolio (map of stockName : numShares)
     std::map<std::string, std::tuple<int, float>> getPortfolioInfo();
     float getProfit();
-    vector<float> getHistoricalProfits();
+    std::vector<float> getHistoricalProfits();
 };
 
 

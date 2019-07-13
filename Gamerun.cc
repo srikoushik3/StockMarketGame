@@ -30,7 +30,7 @@ void GameRun::buyStockCurrentUser(int numShares, string stockName){
   // throw exceptions if something goes wrong
   stockManager->buyShares(numShares, stockName);
   string usernameOfCurrentPlayer = getTurn();
-  string currentStockValue = stockManager.getEODStockPrice(stockName);
+  float currentStockValue = stockManager->getEODStockPrice(stockName);
   userManager->addShares(stockName, usernameOfCurrentPlayer, numShares, currentStockValue);
 }
 
@@ -38,7 +38,7 @@ void GameRun::sellStockCurrentUser(int numShares, string stockName){
   // throw exceptions if something goes wrong
   stockManager->sellShares(numShares, stockName);
   string usernameOfCurrentPlayer = getTurn();
-  string currentStockValue = stockManager.getEODStockPrice(stockName);
+  float currentStockValue = stockManager->getEODStockPrice(stockName);
   userManager->removeShares(stockName, usernameOfCurrentPlayer, numShares, currentStockValue);
 }
 
@@ -46,17 +46,17 @@ vector<string> GameRun::getAllAvailableStocks(){
   return stockManager->getAllAvailableStocks();
 }
 
-map<string, tuple<int, float float>> GameRun::getCurrentUserStockInfo(){
+map<string, tuple<int, float, float>> GameRun::getCurrentUserStockInfo(){
   // return a map of stockname to {Shares Owned, Average Purchase Price, Current Price}
   // call UM to get stockName -> (sharesOwned, avgPurchasePrice)
-  string currentStockValue;
+  float currentStockValue;
   string usernameOfCurrentPlayer = getTurn();
-  map<string, tuple<int, float, float> stockInfo;
+  map<string, tuple<int, float, float>> stockInfo;
   map<string, tuple<int, float>> portfolioInfo = userManager->getUserPortfolioInfo(usernameOfCurrentPlayer);
   for(auto& it: portfolioInfo){
     // iterate through the map and insert the current stock price to another map
-    currentStockValue = stockManager->getEODStockPrice(it->first);
-    stockInfo.insert(make_pair(it->first, make_tuple(get<0>(it->second), get<1>(it->second), currentStockValue)));
+    currentStockValue = stockManager->getEODStockPrice(it.first);
+    stockInfo.insert(pair<string, tuple<int, float, float>>(it.first, make_tuple(get<0>(it.second), get<1>(it.second), currentStockValue)));
   }
   return stockInfo;
 }
@@ -77,9 +77,9 @@ void GameRun::skipNextDayForCurrentUser(){
 
   // add up dividends per stock across entire portfolio
   for(auto& it: portfolioInfo){
-    totalDividends += (stockManager.getEODReturns(it->first) * get<0>(it->second));
+    totalDividends += (stockManager->getEODReturns(it.first) * get<0>(it.second));
   }
-  userManager->addDividendsToUser(totalDividends, username);
+  userManager->addDividendsToUser(totalDividends, usernameOfCurrentPlayer);
 
   // set the EOD stock prices
   stockManager->setEODStockPrices();
@@ -87,8 +87,8 @@ void GameRun::skipNextDayForCurrentUser(){
 
 tuple<string, float, float, int> GameRun::getCurrentUserInformation(){
   string usernameOfCurrentPlayer = getTurn();
-  float cashBalance = userManager->getCashBalance(usernameOfCurrentPlayer);
-  float profits = userManager->getProfits(usernameOfCurrentPlayer);
+  float cashBalance = userManager->getUserCashBalance(usernameOfCurrentPlayer);
+  float profits = userManager->getUserProfits(usernameOfCurrentPlayer);
 
   return make_tuple(usernameOfCurrentPlayer, cashBalance, profits, currentDay);
 }

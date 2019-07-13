@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = StockMarketGame1.0.0
-DISTDIR = /u8/sk2999ne/cs247/StockMarketGame/.tmp/StockMarketGame1.0.0
+DISTDIR = /mnt/c/Users/Sri\ Koushik\ Nellutla/Desktop/2BSchool/CS247/StockMarketGame/.tmp/StockMarketGame1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -63,7 +63,8 @@ SOURCES       = BasicStock.cc \
 		gamestatebase.cpp \
 		UserManager.cc \
 		decorator.cpp \
-		newgamestate.cpp moc_mainwindow.cpp \
+		newgamestate.cpp \
+		Gamerun.cc moc_mainwindow.cpp \
 		moc_newgamefilemanager.cpp
 OBJECTS       = BasicStock.o \
 		Bond.o \
@@ -79,6 +80,7 @@ OBJECTS       = BasicStock.o \
 		UserManager.o \
 		decorator.o \
 		newgamestate.o \
+		Gamerun.o \
 		moc_mainwindow.o \
 		moc_newgamefilemanager.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -135,6 +137,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -166,7 +169,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		gamestatebase.h \
 		UserManager.h \
 		decorator.h \
-		newgamestate.h BasicStock.cc \
+		newgamestate.h \
+		Gamerun.h BasicStock.cc \
 		Bond.cc \
 		Stock.cc \
 		StockManager.cc \
@@ -179,7 +183,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		gamestatebase.cpp \
 		UserManager.cc \
 		decorator.cpp \
-		newgamestate.cpp
+		newgamestate.cpp \
+		Gamerun.cc
 QMAKE_TARGET  = StockMarketGame
 DESTDIR       = 
 TARGET        = StockMarketGame
@@ -245,6 +250,7 @@ Makefile: StockMarketGame.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qm
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -322,6 +328,7 @@ Makefile: StockMarketGame.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qm
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -359,8 +366,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents BasicStock.h Bond.h json.hpp Stock.h StockManager.h mainwindow.h newgamefilemanager.h User.h Portfolio.h gamestatemanager.h gamestatebase.h UserManager.h decorator.h newgamestate.h $(DISTDIR)/
-	$(COPY_FILE) --parents BasicStock.cc Bond.cc Stock.cc StockManager.cc mainwindow.cpp main.cc newgamefilemanager.cpp User.cc Portfolio.cc gamestatemanager.cpp gamestatebase.cpp UserManager.cc decorator.cpp newgamestate.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents BasicStock.h Bond.h json.hpp Stock.h StockManager.h mainwindow.h newgamefilemanager.h User.h Portfolio.h gamestatemanager.h gamestatebase.h UserManager.h decorator.h newgamestate.h Gamerun.h $(DISTDIR)/
+	$(COPY_FILE) --parents BasicStock.cc Bond.cc Stock.cc StockManager.cc mainwindow.cpp main.cc newgamefilemanager.cpp User.cc Portfolio.cc gamestatemanager.cpp gamestatebase.cpp UserManager.cc decorator.cpp newgamestate.cpp Gamerun.cc $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui newgamefilemanager.ui $(DISTDIR)/
 
 
@@ -399,12 +406,12 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/u8/sk2999ne/cs247/StockMarketGame -I/u8/sk2999ne/cs247/StockMarketGame -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/mnt/c/Users/Sri Koushik Nellutla/Desktop/2BSchool/CS247/StockMarketGame' -I'/mnt/c/Users/Sri Koushik Nellutla/Desktop/2BSchool/CS247/StockMarketGame' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 moc_newgamefilemanager.cpp: newgamefilemanager.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/u8/sk2999ne/cs247/StockMarketGame -I/u8/sk2999ne/cs247/StockMarketGame -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include newgamefilemanager.h -o moc_newgamefilemanager.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/mnt/c/Users/Sri Koushik Nellutla/Desktop/2BSchool/CS247/StockMarketGame' -I'/mnt/c/Users/Sri Koushik Nellutla/Desktop/2BSchool/CS247/StockMarketGame' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include newgamefilemanager.h -o moc_newgamefilemanager.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -519,6 +526,17 @@ newgamestate.o: newgamestate.cpp newgamestate.h \
 		Stock.h \
 		json.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o newgamestate.o newgamestate.cpp
+
+Gamerun.o: Gamerun.cc decorator.h \
+		gamestatemanager.h \
+		UserManager.h \
+		User.h \
+		Portfolio.h \
+		StockManager.h \
+		Stock.h \
+		json.hpp \
+		GameRun.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Gamerun.o Gamerun.cc
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
