@@ -4,6 +4,9 @@
 #include <tuple>
 #include <unordered_map>
 #include <vector>
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class Portfolio {
   // dict of stockName: (numShares, bookValue)
@@ -11,11 +14,12 @@ class Portfolio {
   float profit;
   public:
     Portfolio();
-    //Portfolio(json&);
+    Portfolio(const json&);
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
     // return all the stocks in the portfolio (map of stockName : numShares)
     std::unordered_map<std::string, int> getPortfolioStocks();
+    json serialize() const;
 };
 
 

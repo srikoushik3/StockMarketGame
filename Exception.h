@@ -24,4 +24,14 @@ class UserException : public std::exception {
     ~UserException(){}
 };
 
+// Declare the FileIOException Class
+class FileIOException : public std::exception {
+    const char* str;
+  public:
+    FileIOException(const char* msg) : str{msg} {}
+    // Implement the pure virtual function e.what() from standard exception
+    const char* what();
+    ~FileIOException(){}
+};
+
 #endif

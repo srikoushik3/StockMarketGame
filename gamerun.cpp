@@ -1,13 +1,15 @@
 #include "gamerun.h"
 #include "ui_gamerun.h"
+#include <iostream>
 #include <vector>
 #include <QInputDialog>
 
 using namespace std;
 
-gamerun::gamerun(QWidget *parent) :
+gamerun::gamerun(shared_ptr<GameStateManager> gsm, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::gamerun)
+    ui(new Ui::gamerun),
+    gsm(make_shared<NewGameState>(gsm))
 {
     ui->setupUi(this);
     ui->buySellLbl->setText("");
