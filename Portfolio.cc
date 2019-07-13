@@ -54,5 +54,16 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     throw UserException{"Stock Does Not Exist In Portfolio"};
   }
 }
-// return all the stocks in the portfolio (map of stockName : numShares)
-unordered_map<string, int> Portfolio::getPortfolioStocks(){}
+
+map<string, tuple<int, float>> Portfolio::getPortfolioInfo(){
+  // return all the stocks in the portfolio (map of stockName : (numShares, avgPurchasePrice))
+  map<string, tuple<int, float>> portfolioInfo;
+  int numShares;
+  float avgPurchasePrice;
+  for(auto& it: stocksPurchased){
+    numShares = get<0>(it->second);
+    // avgPurchasePrice is (bookvalue of stock) / (num of shares owned)
+    avgPurchasePrice = get<1>(it->second)/get<0>(it->second);
+    portfolioInfo.insert(make_pair(it->first, make_tuple(numShares, avgPurchasePrice));
+  }
+}

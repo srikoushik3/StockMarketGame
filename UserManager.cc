@@ -82,6 +82,13 @@ void UserManager::addDividendsToUser(float totalDividends, string username){
   }
 }
 
-unordered_map<string, tuple<int, float>> UserManager::getUserPortfolioInfo(string){
-  
+map<string, tuple<int, float>> UserManager::getUserPortfolioInfo(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getPortfolioInfo();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
 }

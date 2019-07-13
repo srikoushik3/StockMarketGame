@@ -2,6 +2,7 @@
 #include "gamestatemanager.h"
 #include "GameRun.h"
 #include <memory>
+#include <map>
 
 using namespace std;
 
@@ -45,13 +46,13 @@ vector<string> getAllAvailableStocks(){
 
 }
 
-unordered_map<string, tuple<int, float float>> getCurrentUserStockInfo(){
+map<string, tuple<int, float float>> getCurrentUserStockInfo(){
   // return a map of stockname to {Shares Owned, Average Purchase Price, Current Price}
   // call UM to get stockName -> (sharesOwned, avgPurchasePrice)
   string currentStockValue;
   string usernameOfCurrentPlayer = getTurn();
-  unordered_map<string, tuple<int, float, float> stockInfo;
-  unordered_map<string, tuple<int, float>> portfolioInfo = userManager->getUserPortfolioInfo(usernameOfCurrentPlayer);
+  map<string, tuple<int, float, float> stockInfo;
+  map<string, tuple<int, float>> portfolioInfo = userManager->getUserPortfolioInfo(usernameOfCurrentPlayer);
   for(auto& it: portfolioInfo){
     // iterate through the map and insert the current stock price to another map
     currentStockValue = stockManager->getEODStockPrice(it->first);

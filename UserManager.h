@@ -21,7 +21,7 @@ class UserManager{
     std::vector<User> getUsers();
     void createUsersFromUsername(std::vector<std::string>);
     void addDividendsToUser(float, string);
-    unordered_map<string, tuple<int, float>> getUserPortfolioInfo(string);
+    map<string, tuple<int, float>> getUserPortfolioInfo(string);
 };
 
 #endif

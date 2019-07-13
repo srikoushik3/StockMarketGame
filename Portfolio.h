@@ -15,7 +15,7 @@ class Portfolio {
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
     // return all the stocks in the portfolio (map of stockName : numShares)
-    std::unordered_map<std::string, int> getPortfolioStocks();
+    std::map<string, tuple<int, float>> getPortfolioInfo();
 };
 
 

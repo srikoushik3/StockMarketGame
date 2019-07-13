@@ -24,5 +24,6 @@ class GameRun: public Decorator{
     void sellStockCurrentUser(int, string);
     void skipNextDayForCurrentUser();
     tuple<string, float, float, int> getCurrentUserInformation();
+    map<string, tuple<int, float float>> getCurrentUserStockInfo();
     ~GameRun();
 };

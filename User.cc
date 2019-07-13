@@ -37,3 +37,7 @@ void User::addDividends(float totalDividends){
 Portfolio User::getPortfolio(){
   return portfolio;
 }
+
+unordered_map<string, tuple<int, float>> getPortfolioInfo(){
+  return portfolio.getPortfolioInfo();
+}

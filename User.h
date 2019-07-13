@@ -15,7 +15,8 @@ class User {
     //User(json&);
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
-    void addDividends(float totalDividends);
+    void addDividends(float);
+    unordered_map<string, tuple<int, float>> getPortfolioInfo();
     ~User();
 };
 
