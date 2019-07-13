@@ -9,7 +9,7 @@
 using json = nlohmann::json;
 using namespace std;
 
-LoadGameState::LoadGameState(shared_ptr<Decorator> gsm): Decorator(gsm) {}
+LoadGameState::LoadGameState(shared_ptr<GameStateManager> gsm): Decorator(gsm) {}
 
 void LoadGameState::loadStocksFromFile(json& stocks) {
     try {

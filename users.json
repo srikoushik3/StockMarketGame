@@ -12,5 +12,24 @@
                 }
             ]
         }
+    },
+    {
+      "userName": "CS247-A",
+      "cashBalance": 123.454,
+      "portfolio":{
+          "profit": 1.234,
+          "stocks":[
+              {
+                  "stockName": "abcdef",
+                  "numShares": 112331,
+                  "bookValue": 1.2345
+              },
+              {
+                "stockName": "nim-stockk",
+                "numShares": 112331,
+                "bookValue": 1.2345
+              }
+          ]
+      }
     }
 ]

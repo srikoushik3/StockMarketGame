@@ -6,8 +6,8 @@
 #include <iostream>
 #include "json.hpp"
 #include "Exception.h"
-
 using json = nlohmann::json;
+
 using namespace std;
 
 UserManager::UserManager(){}

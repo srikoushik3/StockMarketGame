@@ -8,7 +8,7 @@ using json = nlohmann::json;
 
 class LoadGameState : public Decorator {
   public:
-    LoadGameState(std::shared_ptr<Decorator>);
+    LoadGameState(std::shared_ptr<GameStateManager>);
     void loadStocksFromFile(json&);
     void loadUsersFromFile(json&);
     ~LoadGameState();

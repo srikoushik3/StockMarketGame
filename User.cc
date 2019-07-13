@@ -1,6 +1,6 @@
 #include "User.h"
-#include "Portfolio.h"
 #include <memory>
+#include "Portfolio.h"
 #include <string>
 #include <iostream>
 #include "Exception.h"
