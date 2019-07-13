@@ -80,6 +80,9 @@ void GameRun::skipNextDayForCurrentUser(){
     totalDividends += (stockManager.getEODReturns(it->first) * get<0>(it->second));
   }
   userManager->addDividendsToUser(totalDividends, username);
+
+  // set the EOD stock prices
+  stockManager->setEODStockPrices();
 }
 
 tuple<string, float, float, int> GameRun::getCurrentUserInformation(){
