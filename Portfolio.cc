@@ -6,7 +6,9 @@
 #include <iostream>
 #include "Portfolio.h"
 #include "Exception.h"
+#include "json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 Portfolio::Portfolio(): profit{0.0} {}
@@ -78,3 +80,56 @@ float Portfolio::getProfit(){
 vector<float> Portfolio::getHistoricalProfits(){
   return historicalProfits;
 }
+
+/*
+  Expected JSON Input:
+  "profit": <int>,
+  "stocks":[
+      {
+          "stockName": <string>,
+          "numShares": <int>,
+          "bookValue": <int>
+      }
+  ]
+*/
+
+Portfolio::Portfolio(const json& j) : profit(j["profit"]){
+  // stocksPurchased
+  json iterJson = j["stocks"];
+  for(json::iterator it = iterJson.begin(); it != iterJson.end(); ++it) {
+    json currentStock = *it;
+    string stockName = currentStock["stockName"];
+    tuple<int, float> x = make_tuple(currentStock["numShares"], currentStock["bookValue"]);
+    stocksPurchased[stockName] = x;
+  }
+}
+
+/*
+  Expected JSON Output:
+  "profit": <int>,
+  "stocks":[
+      {
+          "stockName": <string>,
+          "numShares": <int>,
+          "bookValue": <int>
+      }
+  ]
+*/
+json Portfolio::serialize() const {
+  json stock;
+  json stocksArray = json::array();
+  int numShares = 0;
+  float bookValue = 0.0;
+  for(auto& it: stocksPurchased){
+    stock["stockName"] = it.first;
+    tie(numShares, bookValue) = it.second;
+    stock["numShares"] = numShares;
+    stock["bookValue"] = bookValue;
+    stocksArray.emplace_back(stock);
+  }
+  json portfolioJson = {
+      {"profit", profit},
+      {"stocks", stocksArray}};
+  return portfolioJson;
+}
+

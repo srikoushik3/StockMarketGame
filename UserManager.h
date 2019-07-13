@@ -6,6 +6,8 @@
 #include <string>
 #include <fstream>
 #include <unordered_map>
+#include "json.hpp"
+using json = nlohmann::json;
 
 class UserManager{
   // map of username to ptr to User objects
@@ -14,8 +16,8 @@ class UserManager{
   public:
     UserManager();
     //void removeUser(std::string);
-    void SaveGameForAllUsers();
-    void loadUsersFromFile(std::fstream&);
+    json saveGameForAllUsers() const;
+    void loadUsersFromFile(json &);
     void addShares(std::string, std::string, int, float);
     void removeShares(std::string, std::string, int, float);
     std::vector<User> getUsers();
@@ -26,6 +28,7 @@ class UserManager{
     float getUserProfits(std::string);
     std::vector<float> getHistoricalUserProfits(std::string);
     std::vector<std::string> getUsernames();
+    ~UserManager();
 };
 
 #endif

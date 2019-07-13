@@ -1,6 +1,7 @@
 #include <iostream>
 #include<ctime>
 #include<cstdlib>
+#include <typeinfo>
 #include "Stock.h"
 #include "json.hpp"
 #include "Exception.h"
@@ -60,7 +61,20 @@ Stock::~Stock() {}
   }
 */
 Stock::Stock(const json& j): numShares(j["numShares"]), marketCap(j["marketCap"]), name(j["name"]),
-openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVariance"]){}
+openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVariance"]){
+  srand(unsigned(time(NULL)));
+  // numShares: positive and int
+  if(numShares < 0) throw StockException{"Number of Shares Cannot Be Negative"};
+  if (typeid(numShares).name() != typeid(int).name()) throw StockException{"Number of Shares Must Be an Integer"};
+  // marketCap: positive
+  if(marketCap < 0) throw StockException{"Market Capital Cannot Be Negative"};
+  // name: 20 chars
+  if(name.length() > 5) throw StockException{"Stock Ticker Cannot Be More Than 5 Characters Long"};
+  // openingPricePerShare: positive
+  if(openingPricePerShare < 0) throw StockException{"Share Price Cannot Be Negative"};
+  // maxPriceVariance: positve
+  if(maxPriceVariance < 0) throw StockException{"Variance Cannot Be Negative"};
+}
 
 /*
   Expected JSON Output:

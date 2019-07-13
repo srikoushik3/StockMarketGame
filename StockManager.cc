@@ -95,7 +95,7 @@ void StockManager::loadStocksFromFile(json & stocksJson) {
     json currentStock = *it;
     bool isBond = currentStock["isBond"];
     string stockName = currentStock["name"];
-    unique_ptr<Stock> stock;
+    // unique_ptr<Stock> stock;
     if(isBond){
       stocks[stockName] = std::make_unique<Bond>(currentStock);
     }else{

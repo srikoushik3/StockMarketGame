@@ -3,7 +3,7 @@
         "isBond": false,
         "marketCap": 1000,
         "maxPriceVariance": 0.12999999523162842,
-        "name": "Google",
+        "name": "GOOGL",
         "numShares": 100,
         "openingPricePerShare": 12.130000114440918
     },
@@ -21,7 +21,7 @@
         "isBond": true,
         "marketCap": 1000,
         "maxPriceVariance": 0.12999999523162842,
-        "name": "Facebook",
+        "name": "FB",
         "numShares": 100,
         "openingPricePerShare": 12.130000114440918
     }

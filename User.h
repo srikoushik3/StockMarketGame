@@ -4,6 +4,9 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class User {
   std::string username;
@@ -12,8 +15,8 @@ class User {
   public:
     User(std::string);
     Portfolio getPortfolio();
-    //saveUserState();
-    //User(json&);
+    // saveUserState();
+    User(const json&);
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
     void addDividends(float);
@@ -21,6 +24,7 @@ class User {
     float getCashBalance();
     float getProfits();
     std::vector<float> getHistoricalProfits();
+    json serialize() const;
     ~User();
 };
 
