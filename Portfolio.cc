@@ -70,3 +70,7 @@ map<string, tuple<int, float>> Portfolio::getPortfolioInfo(){
     portfolioInfo.insert(make_pair(it->first, make_tuple(numShares, avgPurchasePrice));
   }
 }
+
+float getProfit(){
+    return profit;
+}

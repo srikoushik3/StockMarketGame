@@ -3,6 +3,7 @@
 #include "Portfolio.h"
 #include <string>
 #include <memory>
+#include <unordered_map>
 
 class User {
   std::string username;
@@ -16,7 +17,7 @@ class User {
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
     void addDividends(float);
-    unordered_map<string, tuple<int, float>> getPortfolioInfo();
+    std::map<std::string, std::tuple<int, float>> getPortfolioInfo();
     float getCashBalance();
     float getProfits();
     std::vector<float> getHistoricalProfits();

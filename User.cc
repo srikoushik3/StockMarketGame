@@ -38,7 +38,7 @@ Portfolio User::getPortfolio(){
   return portfolio;
 }
 
-unordered_map<string, tuple<int, float>> User::getPortfolioInfo(){
+map<string, tuple<int, float>> User::getPortfolioInfo(){
   return portfolio.getPortfolioInfo();
 }
 
@@ -47,9 +47,9 @@ float User::getCashBalance(){
 }
 
 float User::getProfits(){
-  return portfolio.profits;
+  return portfolio.getProfit();
 }
 
-vector<float> getHistoricalProfits(){
+vector<float> User::getHistoricalProfits(){
   return portfolio.historicalProfits();
 }
