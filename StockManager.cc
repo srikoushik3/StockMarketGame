@@ -104,10 +104,10 @@ void StockManager::loadStocksFromFile(json & stocksJson) {
   }
 }
 
-vector<string> getAllAvailableStocks(){
+vector<string> StockManager::getAllAvailableStocks(){
   vector<string> stocksAvail;
   for(auto& it: stocks){
-    stocksAvail.push_back(it->first);
+    stocksAvail.push_back(it.first);
   }
   return stocksAvail;
 }
