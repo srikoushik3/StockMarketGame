@@ -32,8 +32,28 @@ void User::removeShares(string stockName, int numShares, float currentStockValue
   portfolio.removeShares(stockName, numShares, currentStockValue);
 }
 
+void User::addDividends(float totalDividends){
+  cashBalance += totalDividends;
+}
+
 Portfolio User::getPortfolio(){
   return portfolio;
+}
+
+map<string, tuple<int, float>> User::getPortfolioInfo(){
+  return portfolio.getPortfolioInfo();
+}
+
+float User::getCashBalance(){
+  return cashBalance;
+}
+
+float User::getProfits(){
+  return portfolio.getProfit();
+}
+
+vector<float> User::getHistoricalProfits(){
+  return portfolio.getHistoricalProfits();
 }
 
 /*

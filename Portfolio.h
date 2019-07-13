@@ -2,6 +2,7 @@
 #define PORTFOLIO_H
 #include <string>
 #include <tuple>
+#include <map>
 #include <unordered_map>
 #include <vector>
 #include "json.hpp"
@@ -12,13 +13,16 @@ class Portfolio {
   // dict of stockName: (numShares, bookValue)
   std::unordered_map<std::string, std::tuple<int, float>> stocksPurchased;
   float profit;
+  std::vector<float> historicalProfits;
   public:
     Portfolio();
     Portfolio(const json&);
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
     // return all the stocks in the portfolio (map of stockName : numShares)
-    std::unordered_map<std::string, int> getPortfolioStocks();
+    std::map<std::string, std::tuple<int, float>> getPortfolioInfo();
+    float getProfit();
+    std::vector<float> getHistoricalProfits();
     json serialize() const;
 };
 

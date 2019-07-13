@@ -55,12 +55,77 @@ void UserManager::removeShares(string stockName, string username, int numShares,
   }
 }
 
+/*
 vector<User> UserManager::getUsers(){
   vector<User> usersToReturn;
   for(auto& it: users){
     usersToReturn.push_back(*(it.second));
   }
   return usersToReturn;
+}
+*/
+
+vector<string> UserManager::getUsernames(){
+  vector<string> usernamesToReturn;
+  for(auto& it: users){
+    usernamesToReturn.push_back(it.first);
+  }
+  return usernamesToReturn;
+};
+
+void UserManager::addDividendsToUser(float totalDividends, string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    users[username]->addDividends(totalDividends);
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+map<string, tuple<int, float>> UserManager::getUserPortfolioInfo(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getPortfolioInfo();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+float UserManager::getUserCashBalance(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getCashBalance();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+float UserManager::getUserProfits(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getProfits();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+vector<float> UserManager::getHistoricalUserProfits(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getHistoricalProfits();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
 }
 
 // Called when game is saved.

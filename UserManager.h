@@ -22,6 +22,12 @@ class UserManager{
     void removeShares(std::string, std::string, int, float);
     std::vector<User> getUsers();
     void createUsersFromUsername(std::vector<std::string>);
+    void addDividendsToUser(float, std::string);
+    std::map<std::string, std::tuple<int, float>> getUserPortfolioInfo(std::string);
+    float getUserCashBalance(std::string);
+    float getUserProfits(std::string);
+    std::vector<float> getHistoricalUserProfits(std::string);
+    std::vector<std::string> getUsernames();
     ~UserManager();
 };
 

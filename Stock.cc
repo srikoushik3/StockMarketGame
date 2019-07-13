@@ -44,6 +44,10 @@ void Stock::setEODStockPrice() {
   openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
 }
 
+float Stock::getEODStockPrice(){
+  return openingPricePerShare;
+}
+
 Stock::~Stock() {}
 
 /*
