@@ -3,6 +3,9 @@
 #include "Portfolio.h"
 #include <string>
 #include <memory>
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 class User {
   std::string username;
@@ -11,10 +14,11 @@ class User {
   public:
     User(std::string);
     Portfolio getPortfolio();
-    //saveUserState();
-    //User(json&);
+    // saveUserState();
+    User(const json&);
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);
+    json serialize() const;
     ~User();
 };
 
