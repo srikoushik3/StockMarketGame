@@ -14,7 +14,7 @@ using namespace std;
 +getCurrentUserInformation(): User
 */
 
-string getTurn(){
+string GameRun::getTurn(){
   // returns the username of the current user playing
   return usernames.at(currentTurn % usernames.size());
 }
@@ -42,11 +42,11 @@ void GameRun::sellStockCurrentUser(int numShares, string stockName){
   userManager->removeShares(stockName, usernameOfCurrentPlayer, numShares, currentStockValue);
 }
 
-vector<string> getAllAvailableStocks(){
-
+vector<string> GameRun::getAllAvailableStocks(){
+  return stockManager->getAllAvailableStocks();
 }
 
-map<string, tuple<int, float float>> getCurrentUserStockInfo(){
+map<string, tuple<int, float float>> GameRun::getCurrentUserStockInfo(){
   // return a map of stockname to {Shares Owned, Average Purchase Price, Current Price}
   // call UM to get stockName -> (sharesOwned, avgPurchasePrice)
   string currentStockValue;
@@ -70,15 +70,28 @@ void GameRun::skipNextDayForCurrentUser(){
     currentTurn++;
     currentDay = daysPerTurn;
   }
-
   float totalDividends = 0;
-  // get all (stocknames, sharesOwned) owned by user (from UM)
-  // getEODReturns for each stock
-  // add up sharesOwned*EODReturns for all shares
+  string usernameOfCurrentPlayer = getTurn();
+  // map of stockName: (numShares, avgPurchasePrice)
+  map<string, tuple<int, float>> portfolioInfo = userManager->getUserPortfolioInfo(usernameOfCurrentPlayer);
 
+  // add up dividends per stock across entire portfolio
+  for(auto& it: portfolioInfo){
+    totalDividends += (stockManager.getEODReturns(it->first) * get<0>(it->second));
+  }
+  userManager->addDividendsToUser(totalDividends, username);
 }
 
-void GameRun::getAverageReturnsHistoryForUser(string);
 tuple<string, float, float, int> GameRun::getCurrentUserInformation(){
+  string usernameOfCurrentPlayer = getTurn();
+  float cashBalance = userManager->getCashBalance(usernameOfCurrentPlayer);
+  float profits = userManager->getProfits(usernameOfCurrentPlayer);
 
+  return make_tuple(usernameOfCurrentPlayer, cashBalance, profits, currentDay);
+}
+
+vector<float> GameRun::getHistoricalUserProfits(){
+  // note: this method will return the historical profits as per the transaction number
+  string usernameOfCurrentPlayer = getTurn();
+  userManager->getHistoricalUserProfits(usernameOfCurrentPlayer);
 }

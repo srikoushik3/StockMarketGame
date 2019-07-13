@@ -92,3 +92,36 @@ map<string, tuple<int, float>> UserManager::getUserPortfolioInfo(string username
     throw UserException{"User Does Not Exist"};
   }
 }
+
+float UserManager::getUserCashBalance(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getCashBalance();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+float UserManager::getUserProfits(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getProfits();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+vector<float> getHistoricalUserProfits(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getHistoricalProfits();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}

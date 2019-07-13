@@ -17,6 +17,9 @@ class User {
     void removeShares(std::string, int, float);
     void addDividends(float);
     unordered_map<string, tuple<int, float>> getPortfolioInfo();
+    float getCashBalance();
+    float getProfits();
+    std::vector<float> getHistoricalProfits();
     ~User();
 };
 

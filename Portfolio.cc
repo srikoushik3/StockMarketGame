@@ -26,6 +26,7 @@ void Portfolio::addShares(string stockName, int numShares, float currentStockVal
     stocksPurchased.insert(make_pair(stockName, x));
   }
 }
+
 void Portfolio::removeShares(string stockName, int numShares, float currentStockValue){
   //selling shares -> need to calculate book value and the profit
   auto it = stocksPurchased.find(stockName);
@@ -46,6 +47,8 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
       // set new book value
       get<1>(it->second) = (float(get<0>(it->second))/float(oldNumShares))*oldBookValue;
     }
+    // save previous transaction profit
+    historicalProfits.push_back(profit);
     // add the transaction profit
     profit += (numShares*currentStockValue) - (float(numShares)/float(oldNumShares))*oldBookValue;
   }

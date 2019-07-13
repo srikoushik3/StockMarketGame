@@ -25,5 +25,7 @@ class GameRun: public Decorator{
     void skipNextDayForCurrentUser();
     tuple<string, float, float, int> getCurrentUserInformation();
     map<string, tuple<int, float float>> getCurrentUserStockInfo();
+    std::vector<float> getHistoricalUserProfits();
+    std::vector<std::string> getAllAvailableStocks();
     ~GameRun();
 };

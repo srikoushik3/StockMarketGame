@@ -20,6 +20,7 @@ class StockManager {
     bool hasSufficentShares(int numShares, std::string stockName);
     void loadStocksFromFile(json &);
     json saveGameForAllStocks() const;
+    std::vector<string> getAllAvailableStocks();
     ~StockManager();
 };
 
