@@ -4,7 +4,9 @@
 #include <string>
 #include <unordered_map>
 #include <iostream>
+#include "json.hpp"
 #include "Exception.h"
+using json = nlohmann::json;
 
 using namespace std;
 
@@ -60,3 +62,25 @@ vector<User> UserManager::getUsers(){
   }
   return usersToReturn;
 }
+
+// Called when game is saved.
+// Iterates through all users in map and stores information into JSON file
+json UserManager::saveGameForAllUsers() const{
+  json finalJson = json::array();
+  for(auto& it : users) {
+    finalJson.emplace_back(it.second->serialize());
+  }
+  return finalJson;
+}
+
+// Called when game needs to be loaded.
+// Iterates through all fields in the JSON file and inserts information to users map
+void UserManager::loadUsersFromFile(json & usersJson) {
+  for(json::iterator it = usersJson.begin(); it != usersJson.end(); ++it) {
+    json currentUser = *it;
+    string userName = currentUser["userName"];
+    users[userName] = std::make_unique<User>(currentUser);
+  }
+}
+
+UserManager::~UserManager(){}

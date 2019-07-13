@@ -12,3 +12,8 @@ const char* StockException::what() {
 const char* UserException::what() {
     return str;
 }
+
+// Define e.what() in the FileIOException Class by returning private string
+const char* FileIOException::what() {
+    return str;
+}
