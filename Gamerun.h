@@ -23,7 +23,7 @@ class GameRun: public Decorator{
   int totalDays;
   std::string getTurn();
   public:
-    GameRun(std::shared_ptr<GameStateManager>, int, int);
+    GameRun(std::shared_ptr<GameStateManager> g, int daysPerTurn, int totalDays);
     void buyStockCurrentUser(int, std::string);
     void sellStockCurrentUser(int, std::string);
     void skipNextDayForCurrentUser();

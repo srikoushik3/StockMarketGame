@@ -6,14 +6,6 @@
 
 using namespace std;
 
-/*
-+buyStockCurrentUser(numShare: int, stockName: string): void
-+sellStockCurrentUser(numShares: int, stockName: string): void
-+skipNextDayForCurrentUser(): void
-+getAverageReturnsHistoryForUser(username: string): void
-+getCurrentUserInformation(): User
-*/
-
 string GameRun::getTurn(){
   // returns the username of the current user playing
   return usernames.at(currentTurn % usernames.size());
