@@ -1,5 +1,5 @@
 #include "GamerunUI.h"
-#include "ui_gamerun.h"
+#include "ui_GamerunUI.h"
 #include <iostream>
 #include <vector>
 #include <QInputDialog>

@@ -1,5 +1,5 @@
 #include "NewGameUI.h"
-#include "ui_newgamefilemanager.h"
+#include "ui_NewGameUI.h"
 #include "GameStateManager.h"
 #include <fstream>
 #include <QFileDialog>

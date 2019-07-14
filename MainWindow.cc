@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include "ui_mainwindow.h"
+#include "ui_MainWindow.h"
 #include "GameStateBase.h"
 #include "NewGameUI.h"
 #include "LoadGameState.h"
