@@ -38,7 +38,6 @@ void gamerun::updateUserStockTable(){
     QStringList tableHeader;
     tableHeader << "Stock Name" << " # Shares Owned" << " Current Price" << " Average Purchase Price";
     ui->stocksTable->setHorizontalHeaderLabels(tableHeader);
-    ui->stocksTable->setRowCount(this->gsm->getAllAvailableStocks().size());
     int rowCount = 0;
     for (const auto &p: userStocks)
     {
