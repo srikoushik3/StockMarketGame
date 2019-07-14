@@ -81,6 +81,9 @@ void NewGameFileManager::on_submitBtn_clicked()
         ifs >> stocksJson;
         this->gsm->createStocksFromFile(stocksJson);
         this->gsm->createUsers(usernames);
-        QApplication::quit();
+        gamerun gr(gsm, daysPerTurn, totalDays);
+        this->hide();
+        gr.setModal(true);
+        gr.exec();
     }
 }

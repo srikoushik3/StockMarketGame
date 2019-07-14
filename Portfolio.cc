@@ -28,6 +28,7 @@ void Portfolio::addShares(string stockName, int numShares, float currentStockVal
     stocksPurchased.insert(make_pair(stockName, x));
   }
 }
+
 void Portfolio::removeShares(string stockName, int numShares, float currentStockValue){
   //selling shares -> need to calculate book value and the profit
   auto it = stocksPurchased.find(stockName);
@@ -48,6 +49,8 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
       // set new book value
       get<1>(it->second) = (float(get<0>(it->second))/float(oldNumShares))*oldBookValue;
     }
+    // save previous transaction profit
+    historicalProfits.push_back(profit);
     // add the transaction profit
     profit += (numShares*currentStockValue) - (float(numShares)/float(oldNumShares))*oldBookValue;
   }
@@ -56,8 +59,29 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     throw UserException{"Stock Does Not Exist In Portfolio"};
   }
 }
-// return all the stocks in the portfolio (map of stockName : numShares)
-unordered_map<string, int> Portfolio::getPortfolioStocks(){}
+
+map<string, tuple<int, float>> Portfolio::getPortfolioInfo(){
+  // return all the stocks in the portfolio (map of stockName : (numShares, avgPurchasePrice))
+  map<string, tuple<int, float>> portfolioInfo;
+  int numShares;
+  float avgPurchasePrice;
+  for(auto& it: stocksPurchased){
+    numShares = get<0>(it.second);
+    // avgPurchasePrice is (bookvalue of stock) / (num of shares owned)
+    avgPurchasePrice = get<1>(it.second)/get<0>(it.second);
+    portfolioInfo.insert(make_pair(it.first, make_tuple(numShares, avgPurchasePrice)));
+  }
+  return portfolioInfo;
+}
+
+float Portfolio::getProfit(){
+    return profit;
+}
+
+vector<float> Portfolio::getHistoricalProfits(){
+  return historicalProfits;
+}
+
 /*
   Expected JSON Input:
   "profit": <int>,
@@ -109,3 +133,4 @@ json Portfolio::serialize() const {
       {"stocks", stocksArray}};
   return portfolioJson;
 }
+

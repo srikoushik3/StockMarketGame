@@ -17,12 +17,10 @@ Stock::Stock() {
 // buyShares is called by buyShares in StockManager Class
 // Removes the stocks bought from the number of stocks available
 void Stock::buyShares(int numSharesPurchased) {
-  if (numShares - numSharesPurchased < 0) {
+  if (numShares - numSharesPurchased >= 0) {
     numShares -= numSharesPurchased;
-  }
-  else{
-    //throw NotEnoughSharesForTransaction exception
-    throw StockException{"Not Enough Shares For Transaction"};
+  }else{
+    throw StockException{"Not Enough Stocks For Transaction"};
   }
 }
 
@@ -42,6 +40,10 @@ bool Stock::hasSufficentShares(int numSharesToBePurchased) {
 // Uses Variance to calculate the Stock price when user proceeds to next trading day
 void Stock::setEODStockPrice() {
   openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
+}
+
+float Stock::getEODStockPrice(){
+  return openingPricePerShare;
 }
 
 Stock::~Stock() {}

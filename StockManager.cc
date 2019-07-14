@@ -55,6 +55,18 @@ void StockManager::setEODStockPrices() {
         it.second->setEODStockPrice();
     }
 }
+
+// get current stock price
+float StockManager::getEODStockPrice(string stockName){
+  if (stocks.find(stockName) != stocks.end()) {
+    // stock found, return the price
+    return stocks[stockName]->getEODStockPrice();
+  }
+  else{
+    // throw StockDoesNotExistException
+    throw StockException{"Stock Does Not Exist"};
+  }
+}
 // Search for stock in map and call hasSufficentShares function on that stock
 // Return true if enough stocks available, else return false
 bool StockManager::hasSufficentShares(int numShares, string stockName) {
@@ -89,6 +101,25 @@ void StockManager::loadStocksFromFile(json & stocksJson) {
     }else{
       stocks[stockName] = std::make_unique<BasicStock>(currentStock);
     }
+  }
+}
+
+vector<string> StockManager::getAllAvailableStocks(){
+  vector<string> stocksAvail;
+  for(auto& it: stocks){
+    stocksAvail.push_back(it.first);
+  }
+  return stocksAvail;
+}
+
+float StockManager::getEODReturns(string stockName){
+  if (stocks.find(stockName) != stocks.end()) {
+    // stock found, return the dividend returns
+    return stocks[stockName]->getEODReturns();
+  }
+  else{
+    // throw StockDoesNotExistException
+    throw StockException{"Stock Does Not Exist"};
   }
 }
 

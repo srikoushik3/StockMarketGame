@@ -41,7 +41,7 @@ void MainWindow::on_loadGameBtn_clicked()
     ufs >> usersJson;
     gsm->loadStocksFromFile(stocksJson);
     gsm->loadUsersFromFile(usersJson);
-    gamerun gr(gsm);
+    gamerun gr(gsm, 10, 10);
     this->hide();
     gr.setModal(true);
     gr.exec();
