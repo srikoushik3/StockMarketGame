@@ -71,6 +71,7 @@ map<string, tuple<int, float>> Portfolio::getPortfolioInfo(){
     avgPurchasePrice = get<1>(it.second)/get<0>(it.second);
     portfolioInfo.insert(make_pair(it.first, make_tuple(numShares, avgPurchasePrice)));
   }
+  return portfolioInfo;
 }
 
 float Portfolio::getProfit(){

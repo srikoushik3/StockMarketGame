@@ -1,8 +1,9 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "gamestatebase.h"
-#include "newgamefilemanager.h"
+#include "MainWindow.h"
+#include "ui_MainWindow.h"
+#include "GameStateBase.h"
+#include "NewGameUI.h"
 #include "LoadGameState.h"
+#include "GamerunUI.h"
 #include <memory>
 #include <fstream>
 
@@ -40,5 +41,8 @@ void MainWindow::on_loadGameBtn_clicked()
     ufs >> usersJson;
     gsm->loadStocksFromFile(stocksJson);
     gsm->loadUsersFromFile(usersJson);
-    QApplication::quit();
+    gamerun gr(gsm, 10, 10);
+    this->hide();
+    gr.setModal(true);
+    gr.exec();
 }

@@ -17,12 +17,10 @@ Stock::Stock() {
 // buyShares is called by buyShares in StockManager Class
 // Removes the stocks bought from the number of stocks available
 void Stock::buyShares(int numSharesPurchased) {
-  if (numShares - numSharesPurchased < 0) {
+  if (numShares - numSharesPurchased >= 0) {
     numShares -= numSharesPurchased;
-  }
-  else{
-    //throw NotEnoughSharesForTransaction exception
-    throw StockException{"Not Enough Shares For Transaction"};
+  }else{
+    throw StockException{"Not Enough Stocks For Transaction"};
   }
 }
 

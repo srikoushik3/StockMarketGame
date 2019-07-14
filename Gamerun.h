@@ -1,5 +1,8 @@
-#include "decorator.h"
-#include "gamestatemanager.h"
+#ifndef GAMERUNSTATE_H
+#define GAMERUNSTATE_H
+
+#include "Decorator.h"
+#include "GameStateManager.h"
 #include <memory>
 #include <string>
 #include <tuple>
@@ -31,5 +34,7 @@ class GameRun: public Decorator{
     std::map<std::string, std::tuple<int, float, float>> getCurrentUserStockInfo();
     std::vector<float> getHistoricalUserProfits();
     std::vector<std::string> getAllAvailableStocks();
-    ~GameRun();
+    ~GameRun() {}
 };
+
+#endif

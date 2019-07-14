@@ -1,6 +1,6 @@
-#include "newgamefilemanager.h"
-#include "ui_newgamefilemanager.h"
-#include "gamestatemanager.h"
+#include "NewGameUI.h"
+#include "ui_NewGameUI.h"
+#include "GameStateManager.h"
 #include <fstream>
 #include <QFileDialog>
 #include <QInputDialog>
@@ -8,6 +8,7 @@
 #include <memory>
 #include <sstream>
 #include "json.hpp"
+#include "GamerunUI.h"
 
 using json = nlohmann::json;
 
@@ -80,6 +81,9 @@ void NewGameFileManager::on_submitBtn_clicked()
         ifs >> stocksJson;
         this->gsm->createStocksFromFile(stocksJson);
         this->gsm->createUsers(usernames);
-        QApplication::quit();
+        gamerun gr(gsm, daysPerTurn, totalDays);
+        this->hide();
+        gr.setModal(true);
+        gr.exec();
     }
 }

@@ -2,7 +2,7 @@
 #define LOADGAMESTATE_H_
 #include <string>
 #include <memory>
-#include "decorator.h"
+#include "Decorator.h"
 #include "json.hpp"
 using json = nlohmann::json;
 

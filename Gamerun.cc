@@ -1,6 +1,6 @@
-#include "decorator.h"
-#include "gamestatemanager.h"
-#include "GameRun.h"
+#include "Decorator.h"
+#include "GameStateManager.h"
+#include "Gamerun.h"
 #include <memory>
 #include <map>
 
@@ -81,8 +81,7 @@ tuple<string, float, float, int> GameRun::getCurrentUserInformation(){
   string usernameOfCurrentPlayer = getTurn();
   float cashBalance = userManager->getUserCashBalance(usernameOfCurrentPlayer);
   float profits = userManager->getUserProfits(usernameOfCurrentPlayer);
-
-  return make_tuple(usernameOfCurrentPlayer, cashBalance, profits, currentDay);
+  return make_tuple(usernameOfCurrentPlayer, cashBalance, profits, daysPerTurn - currentDay);
 }
 
 vector<float> GameRun::getHistoricalUserProfits(){
