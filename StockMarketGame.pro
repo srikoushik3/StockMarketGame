@@ -9,25 +9,31 @@ INCLUDEPATH += .
 # Input
 QT += widgets
 HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
-    mainwindow.h \
-    newgamefilemanager.h User.h Portfolio.h \
-    gamestatemanager.h \
-    gamestatebase.h UserManager.h \
-    decorator.h \
-    gamerun.h \
+    User.h Portfolio.h \
+    UserManager.h \
     Gamerun.h \
-    newgamestate.h LoadGameState.h Exception.h
+    LoadGameState.h Exception.h \
+    Decorator.h \
+    GamerunUI.h \
+    GameStateBase.h \
+    GameStateManager.h \
+    MainWindow.h \
+    NewGameState.h \
+    NewGameUI.h
 SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
-    mainwindow.cpp \
     main.cc \
-    newgamefilemanager.cpp \
     User.cc Portfolio.cc \
-    gamestatemanager.cpp \
-    gamestatebase.cpp UserManager.cc \
-    decorator.cpp \
-    gamerun.cpp \
+    UserManager.cc \
     Gamerun.cc \
-    newgamestate.cpp Exception.cc LoadGameState.cc
+    Exception.cc LoadGameState.cc \
+    GamerunUI.cc \
+    GameStateBase.cc \
+    GameStateManager.cc \
+    Decorator.cc \
+    MainWindow.cc \
+    NewGameState.cc \
+    NewGameUI.cc
 FORMS += \
-    mainwindow.ui \
-    newgamefilemanager.ui gamerun.ui
+    GamerunUI.ui \
+    MainWindow.ui \
+    NewGameUI.ui

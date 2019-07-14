@@ -1,5 +1,5 @@
-#include "decorator.h"
-#include "gamestatemanager.h"
+#include "Decorator.h"
+#include "GameStateManager.h"
 #include "Gamerun.h"
 #include <memory>
 #include <map>

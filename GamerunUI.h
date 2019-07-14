@@ -2,7 +2,7 @@
 #define GAMERUN_H
 
 #include <QDialog>
-#include "gamestatemanager.h"
+#include "GameStateManager.h"
 #include "Gamerun.h"
 #include <memory>
 

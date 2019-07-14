@@ -1,4 +1,4 @@
-#include "newgamestate.h"
+#include "NewGameState.h"
 #include <memory>
 
 using namespace std;

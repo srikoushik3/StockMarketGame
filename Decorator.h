@@ -1,7 +1,7 @@
 #ifndef DECORATOR_H
 #define DECORATOR_H
 
-#include "gamestatemanager.h"
+#include "GameStateManager.h"
 #include <memory>
 
 

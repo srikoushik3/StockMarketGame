@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <memory>
-#include "newgamestate.h"
+#include "NewGameState.h"
 
 namespace Ui {
 class NewGameFileManager;

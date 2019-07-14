@@ -1,8 +1,8 @@
 #ifndef NEWGAMESTATE_H
 #define NEWGAMESTATE_H
 
-#include "decorator.h"
-#include "gamestatemanager.h"
+#include "Decorator.h"
+#include "GameStateManager.h"
 #include <memory>
 #include "json.hpp"
 #include <vector>

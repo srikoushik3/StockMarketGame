@@ -1,8 +1,8 @@
 #ifndef GAMERUNSTATE_H
 #define GAMERUNSTATE_H
 
-#include "decorator.h"
-#include "gamestatemanager.h"
+#include "Decorator.h"
+#include "GameStateManager.h"
 #include <memory>
 #include <string>
 #include <tuple>

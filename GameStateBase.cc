@@ -1,4 +1,4 @@
-#include "gamestatebase.h"
+#include "GameStateBase.h"
 #include "UserManager.h"
 #include "StockManager.h"
 #include <memory>
