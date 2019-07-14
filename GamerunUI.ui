@@ -202,7 +202,7 @@
     <string>Current Day:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="saveGameBtn">
    <property name="geometry">
     <rect>
      <x>30</x>
