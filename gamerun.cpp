@@ -5,6 +5,8 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include "Exception.h"
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -40,15 +42,17 @@ void gamerun::updateUserStockTable(){
     int rowCount = 0;
     for (const auto &p: userStocks)
     {
+        stringstream stream;
         ui->stocksTable->setItem(rowCount,0,new QTableWidgetItem(QString::fromStdString(p.first)));
         ui->stocksTable->setItem(rowCount,1,new QTableWidgetItem(QString::number(get<0>(p.second))));
-        ui->stocksTable->setItem(rowCount,2,new QTableWidgetItem(QString::number(get<2>(p.second))));
-        ui->stocksTable->setItem(rowCount,3,new QTableWidgetItem(QString::number(get<1>(p.second))));
+        stream << "$" << std::fixed << std::setprecision(2) << get<2>(p.second);
+        ui->stocksTable->setItem(rowCount,2,new QTableWidgetItem(QString::fromStdString(stream.str())));
+        stream.str("");
+        stream << "$" << std::fixed << std::setprecision(2) << get<1>(p.second);
+        ui->stocksTable->setItem(rowCount,3,new QTableWidgetItem(QString::fromStdString(stream.str())));
         rowCount++;
     }
 }
-
-
 
 void gamerun::updateUserInformation(){
     string username;
@@ -56,8 +60,12 @@ void gamerun::updateUserInformation(){
     int currentDay;
     tie(username, cashBalance, profit, currentDay) = gsm->getCurrentUserInformation();
     ui->usernameLbl->setText(QString::fromStdString(username));
-    ui->cashBalanceLbl->setText(QString::number(cashBalance));
-    ui->profitsLbl->setText(QString::number(profit));
+    stringstream stream;
+    stream << "$" << std::fixed << std::setprecision(2) << cashBalance;
+    ui->cashBalanceLbl->setText(QString::fromStdString(stream.str()));
+    stream.str("");
+    stream << "$" << std::fixed << std::setprecision(2) << profit;
+    ui->profitsLbl->setText(QString::fromStdString(stream.str()));
     ui->currentDayLbl->setText(QString::number(currentDay));
 }
 
