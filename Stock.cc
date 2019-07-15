@@ -20,7 +20,7 @@ void Stock::buyShares(int numSharesPurchased) {
   if (numShares - numSharesPurchased >= 0) {
     numShares -= numSharesPurchased;
   }else{
-    throw StockException{"Not Enough Stocks For Transaction"};
+    throw StockException{"Cannot buy more shares than total shares for stock"};
   }
 }
 
