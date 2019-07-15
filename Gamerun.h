@@ -31,9 +31,11 @@ class GameRun: public Decorator{
     void sellStockCurrentUser(int, std::string);
     void skipNextDayForCurrentUser();
     std::tuple<std::string, float, float, int> getCurrentUserInformation();
-    std::map<std::string, std::tuple<int, float, float>> getCurrentUserStockInfo();
+    std::map<std::string, std::tuple<int, float, float, float>> getCurrentUserStockInfo();
     std::vector<float> getHistoricalUserProfits();
     std::vector<std::string> getAllAvailableStocks();
+    json saveGameForUsers();
+    json saveGameForAllStocks();
     ~GameRun() {}
 };
 

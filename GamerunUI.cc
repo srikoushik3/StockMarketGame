@@ -6,9 +6,12 @@
 #include <QMessageBox>
 #include "Exception.h"
 #include <sstream>
+#include <fstream>
 #include <iomanip>
 
 using namespace std;
+
+using json = nlohmann::json;
 
 gamerun::gamerun(shared_ptr<GameStateManager> gsm, int daysPerTurn, int totalDays, QWidget *parent) :
     QDialog(parent),
@@ -30,27 +33,30 @@ void gamerun::updateStockDropdown(){
 }
 
 void gamerun::updateUserStockTable(){
-    map<string, tuple<int, float, float>> userStocks = gsm->getCurrentUserStockInfo();
+    map<string, tuple<int, float, float, float>> userStocks = gsm->getCurrentUserStockInfo();
     ui->stocksTable->clear();
-    ui->stocksTable->setColumnCount(4);
+    ui->stocksTable->setColumnCount(5);
     ui->stocksTable->setRowCount(this->gsm->getAllAvailableStocks().size());
     ui->stocksTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     QStringList tableHeader;
-    tableHeader << "Stock Name" << " # Shares Owned" << " Current Price" << " Average Purchase Price";
+    tableHeader << "Stock Name" << " # Shares Owned" << " Current Price" << " Average Purchase Price" << "Dividend";
     ui->stocksTable->setHorizontalHeaderLabels(tableHeader);
     int rowCount = 0;
     for (const auto &p: userStocks)
     {
-        stringstream stream;
         ui->stocksTable->setItem(rowCount,0,new QTableWidgetItem(QString::fromStdString(p.first)));
         ui->stocksTable->setItem(rowCount,1,new QTableWidgetItem(QString::number(get<0>(p.second))));
-        stream << "$" << std::fixed << std::setprecision(2) << get<2>(p.second);
-        ui->stocksTable->setItem(rowCount,2,new QTableWidgetItem(QString::fromStdString(stream.str())));
-        stream.str("");
-        stream << "$" << std::fixed << std::setprecision(2) << get<1>(p.second);
-        ui->stocksTable->setItem(rowCount,3,new QTableWidgetItem(QString::fromStdString(stream.str())));
+        ui->stocksTable->setItem(rowCount,2,new QTableWidgetItem(QString::fromStdString(getMonetaryFloat(get<2>(p.second)))));
+        ui->stocksTable->setItem(rowCount,3,new QTableWidgetItem(QString::fromStdString(getMonetaryFloat(get<1>(p.second)))));
+        ui->stocksTable->setItem(rowCount,4,new QTableWidgetItem(QString::fromStdString(getMonetaryFloat(get<3>(p.second)))));
         rowCount++;
     }
+}
+
+string gamerun::getMonetaryFloat(float f) {
+    stringstream stream;
+    stream << "$" << std::fixed << std::setprecision(2) << f;
+    return stream.str();
 }
 
 void gamerun::updateUserInformation(){
@@ -131,4 +137,19 @@ void gamerun::on_skipBtn_clicked()
     gsm->skipNextDayForCurrentUser();
     updateUserInformation();
     updateUserStockTable();
+}
+
+void gamerun::on_saveGameBtn_clicked()
+{
+    try{
+        json stocksJson = gsm->saveGameForAllStocks();
+        json usersJson = gsm->saveGameForUsers();
+        ofstream users("users.json");
+        users << setw(4) << usersJson << endl;
+        ofstream stocks("stocks.json");
+        stocks << setw(4) << stocksJson << endl;
+        QMessageBox::information(this, tr("Success"), tr("Saved Game Successfully!"));
+    }catch(...){
+        QMessageBox::information(this, tr("Error"), tr("Could not Save Game"));
+    }
 }
