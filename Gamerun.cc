@@ -3,7 +3,9 @@
 #include "Gamerun.h"
 #include <memory>
 #include <map>
+#include "json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 string GameRun::getTurn(){
@@ -38,17 +40,30 @@ vector<string> GameRun::getAllAvailableStocks(){
   return stockManager->getAllAvailableStocks();
 }
 
-map<string, tuple<int, float, float>> GameRun::getCurrentUserStockInfo(){
-  // return a map of stockname to {Shares Owned, Average Purchase Price, Current Price}
+map<string, tuple<int, float, float, float>> GameRun::getCurrentUserStockInfo(){
+  // return a map of stockname to {Shares Owned, Average Purchase Price, Current Price, Dividends}
   // call UM to get stockName -> (sharesOwned, avgPurchasePrice)
-  float currentStockValue;
+  float currentStockValue, dividend;
+  int sharesOwned;
+  float avgPurchasePrice;
   string usernameOfCurrentPlayer = getTurn();
-  map<string, tuple<int, float, float>> stockInfo;
+  map<string, tuple<int, float, float, float>> stockInfo;
   map<string, tuple<int, float>> portfolioInfo = userManager->getUserPortfolioInfo(usernameOfCurrentPlayer);
-  for(auto& it: portfolioInfo){
-    // iterate through the map and insert the current stock price to another map
-    currentStockValue = stockManager->getEODStockPrice(it.first);
-    stockInfo.insert(pair<string, tuple<int, float, float>>(it.first, make_tuple(get<0>(it.second), get<1>(it.second), currentStockValue)));
+  vector<string> allStockNames = getAllAvailableStocks();
+  for(auto& it: allStockNames){
+    currentStockValue = stockManager->getEODStockPrice(it);
+    dividend = stockManager->getEODReturns(it);
+    if(portfolioInfo.find(it) != portfolioInfo.end()){
+      // stock exists in user's portfolio
+      sharesOwned = get<0>(portfolioInfo[it]);
+      avgPurchasePrice = get<1>(portfolioInfo[it]);
+    }
+    else{
+      // stock does not exist in user's portfolio
+      sharesOwned = 0;
+      avgPurchasePrice = 0;
+    }
+    stockInfo.insert(pair<string, tuple<int, float, float, float>>(it, make_tuple(sharesOwned, avgPurchasePrice, currentStockValue, dividend)));
   }
   return stockInfo;
 }
@@ -81,6 +96,7 @@ tuple<string, float, float, int> GameRun::getCurrentUserInformation(){
   string usernameOfCurrentPlayer = getTurn();
   float cashBalance = userManager->getUserCashBalance(usernameOfCurrentPlayer);
   float profits = userManager->getUserProfits(usernameOfCurrentPlayer);
+
   return make_tuple(usernameOfCurrentPlayer, cashBalance, profits, daysPerTurn - currentDay);
 }
 
@@ -88,4 +104,14 @@ vector<float> GameRun::getHistoricalUserProfits(){
   // note: this method will return the historical profits as per the transaction number
   string usernameOfCurrentPlayer = getTurn();
   userManager->getHistoricalUserProfits(usernameOfCurrentPlayer);
+}
+
+json GameRun::saveGameForUsers(){
+  // call save game for users
+  return userManager->saveGameForAllUsers();
+}
+
+json GameRun::saveGameForAllStocks(){
+  // call save game for stocks
+  return stockManager->saveGameForAllStocks();
 }

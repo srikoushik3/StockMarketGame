@@ -26,12 +26,15 @@ private slots:
     void on_sellSubmitBtn_clicked();
     void on_skipBtn_clicked();
 
+    void on_saveGameBtn_clicked();
+
 private:
     Ui::gamerun *ui;
     std::string stockName;
     void updateStockDropdown();
     void updateUserStockTable();
     void updateUserInformation();
+    std::string getMonetaryFloat(float);
     int numShares;
     std::shared_ptr<GameRun> gsm;
 };
