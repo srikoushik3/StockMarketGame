@@ -1,3 +1,15 @@
+ /*
+  * File: Portfolio.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the Portfolio class which contains an
+  *   unordered map (portfolio) that maps the name of stock to a tuple of
+  *   number of shares and book value of portfolio. Consequently, it is
+  *   responsible for functionalities such as adding and removing shares to
+  *   portfolio and making various portfolio based calculations such as profit
+  *   and book value.
+  */
 #ifndef PORTFOLIO_H
 #define PORTFOLIO_H
 #include <string>

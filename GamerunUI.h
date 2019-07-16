@@ -1,3 +1,13 @@
+ /*
+  * File: GamerunUI.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the gamerun class which inherit from
+  *   the QDialog Class. This class is responsible for establishing the link
+  *   between the Game Run Frontend and Backend by controlling actions of
+  *   various UI components, such as buttons and dropdown.
+  */
 #ifndef GAMERUN_H
 #define GAMERUN_H
 

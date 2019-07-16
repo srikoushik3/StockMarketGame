@@ -1,3 +1,16 @@
+ /*
+  * File: GameRun.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the GameRun class which inherit from
+  *   the Decorator Class. This is one of the main classes as it contains
+  *   methods that are responsible for handling the functionalities of the
+  *   actual game play. It contains game play information such as currentTurn,
+  *   currentDay, daysPerTurn and totalDays. Additionally it contains critical
+  *   game play methods such as buyStockCurrentUser, sellStockCurrentUser and
+  *   skipNextDayForCurrentUser to name a few.
+  */
 #ifndef GAMERUNSTATE_H
 #define GAMERUNSTATE_H
 
