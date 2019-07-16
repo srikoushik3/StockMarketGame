@@ -1,6 +1,6 @@
  /*
   * File: UserManager.h
-  * 
+  *
   * Date: Spring 2019
   * Summary of File:
   *   This file contains code for the UserManager class which contains an
@@ -39,6 +39,8 @@ class UserManager{
     float getUserProfits(std::string);
     std::vector<float> getHistoricalUserProfits(std::string);
     std::vector<std::string> getUsernames();
+    float getMaxProfit(std::string);
+    float getMinProfit(std::string);
     ~UserManager();
 };
 
