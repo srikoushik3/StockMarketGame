@@ -114,6 +114,10 @@ Portfolio::Portfolio(const json& j) : profit(j["profit"]){
   for(json::iterator it = histAvg.begin(); it != histAvg.end(); ++it){
       historicalProfits.emplace_back(*it);
   }
+  profitsMaxHeap = historicalProfits;
+  make_heap(profitsMaxHeap.begin(), profitsMaxHeap.end());
+  profitsMinHeap = historicalProfits;
+  make_heap(profitsMinHeap.begin(), profitsMinHeap.end(), greater<int>());
 }
 
 /*

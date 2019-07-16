@@ -29,7 +29,8 @@ void Graph::makePlot(){
     ui->returnsGraph->yAxis->setLabel("Profit Earned");
     // set axes ranges, so we see all data:
     ui->returnsGraph->xAxis->setRange(0, x.size());
-    ui->returnsGraph->yAxis->setRange(-20, 20);
+    cout << gsm->getMinProfit() << " " << gsm->getMaxProfit() << endl;
+    ui->returnsGraph->yAxis->setRange(gsm->getMinProfit(), gsm->getMaxProfit());
     ui->returnsGraph->replot();
 }
 
