@@ -14,6 +14,13 @@ using namespace std;
 
 using json = nlohmann::json;
 
+/* 
+ * Parameters   : shared pointer to GameStateManager, integer for days per turn, integer for total days and pointer to QWidget
+ * Return Value : None
+ * Description  : 
+ *    When this contructor is invoked it sets up the game run window and other
+ *    components such as the table, user information and dropdown menu.
+ */
 gamerun::gamerun(shared_ptr<GameStateManager> gsm, int daysPerTurn, int totalDays, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::gamerun),
@@ -26,6 +33,13 @@ gamerun::gamerun(shared_ptr<GameStateManager> gsm, int daysPerTurn, int totalDay
     updateUserStockTable();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it calls the getAllAvailableStocks method to
+ *    add all available stocks to the dropdown menu.
+ */
 void gamerun::updateStockDropdown(){
     vector<string> stocks = gsm->getAllAvailableStocks();
     for(string s: stocks){
@@ -33,6 +47,14 @@ void gamerun::updateStockDropdown(){
     }
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it calls the getCurrentUserStockInfo method to
+ *    retieve all user and stock information, which would then be accessed to
+ *    populate the table.
+ */
 void gamerun::updateUserStockTable(){
     map<string, tuple<int, float, float, float>> userStocks = gsm->getCurrentUserStockInfo();
     ui->stocksTable->clear();
@@ -54,12 +76,26 @@ void gamerun::updateUserStockTable(){
     }
 }
 
+/* 
+ * Parameters   : Float f
+ * Return Value : String type
+ * Description  : 
+ *    When this method is invoked it displays monetary values in $x.xx format.
+ */
 string gamerun::getMonetaryFloat(float f) {
     stringstream stream;
     stream << "$" << std::fixed << std::setprecision(2) << f;
     return stream.str();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it calls the getCurrentUserInformation method to
+ *    retieve the current user's information, which would then be accessed to
+ *    update the users progress on display.
+ */
 void gamerun::updateUserInformation(){
     string username;
     float cashBalance, profit;
@@ -75,18 +111,39 @@ void gamerun::updateUserInformation(){
     ui->currentDayLbl->setText(QString::number(currentDay));
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this destructor is invoked it simply deletes the UI component.
+ */
 gamerun::~gamerun()
 {
     delete ui;
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it prompts the user for number of shares
+ *    they want to buy/sell.
+ */
 void gamerun::on_buySellBtn_clicked()
 {
-    // Prompt user for number of shares they want to buy/sell shares from
     numShares = QInputDialog::getInt(this, "Number of Shares", "Enter Number Of Shares");
     ui->buySellLbl->setText(QString::number(numShares));
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it prompts the user for number of shares to 
+ *    buy and it will try to call the buyStockCurrentUser method to purchase a
+ *    particular stock for the current user. If any errors, then an appropriate
+ *    user/stock exception is thrown. Else success message is shown.
+ */
 void gamerun::on_buySubmitBtn_clicked()
 {
     // Buy Stock
@@ -110,6 +167,15 @@ void gamerun::on_buySubmitBtn_clicked()
     QMessageBox::information(this, tr("Success"), tr("Success!"));
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it prompts the user for number of shares to 
+ *    sell and it will try to call the sellStockCurrentUser method to sell a
+ *    particular stock for the current user. If any errors, then an appropriate
+ *    user/stock exception is thrown. Else success message is shown.
+ */
 void gamerun::on_sellSubmitBtn_clicked()
 {
     // Sell Stock
@@ -133,6 +199,15 @@ void gamerun::on_sellSubmitBtn_clicked()
     QMessageBox::information(this, tr("Success"), tr("Success!"));
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it calls the skipNextDayForCurrentUser method
+ *    to start new trading day for current user. Additionally it calls
+ *    updateUserInformation and updateUserStockTable to update the user information
+ *    and table after the user completes a day of trading.
+ */
 void gamerun::on_skipBtn_clicked()
 {
     gsm->skipNextDayForCurrentUser();
@@ -140,6 +215,14 @@ void gamerun::on_skipBtn_clicked()
     updateUserStockTable();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it calls the saveGameForAllStocks and
+ *    saveGameForUsers method on GameStateManager to save all the user and
+ *    stock information into a user.json and stocks.json file, respectively.
+ */
 void gamerun::on_saveGameBtn_clicked()
 {
     try{
@@ -155,6 +238,14 @@ void gamerun::on_saveGameBtn_clicked()
     }
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it creates an instance of the Graph Class by
+ *    passing the shared pointer to the GameStateManager as a parameter and
+ *    calling the methods to set up the graph for the user's historical profit.
+ */
 void gamerun::on_profitHistoryBtn_clicked()
 {
     Graph profitHistory(gsm);

@@ -1,3 +1,12 @@
+ /*
+  * File: Graph.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the Graph class which inherits from QDialog
+  *   Class and is responsible for plotting a graph for Profit Earned versus
+  *   the Number of Transactions.
+  */
 #ifndef GRAPH_H
 #define GRAPH_H
 

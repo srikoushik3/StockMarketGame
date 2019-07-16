@@ -7,6 +7,13 @@
 
 using namespace std;
 
+/* 
+ * Parameters   : Shared pointer to GameRun and pointer to QWidget
+ * Return Value : None
+ * Description  : 
+ *    When this contructor is invoked it does the set up for the graph UI
+ *    and calls the makePlot method defined below.
+ */
 Graph::Graph(shared_ptr<GameRun> gsm, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Graph),
@@ -16,6 +23,13 @@ Graph::Graph(shared_ptr<GameRun> gsm, QWidget *parent) :
     Graph::makePlot();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it produces a graph plot with Profit Earned
+ *    on the Y-axis and Number of Transactions on the X-axis.
+ */
 void Graph::makePlot(){
     vector<float> histProfitsF = gsm->getHistoricalUserProfits();
     vector<double> histProfitsD(histProfitsF.begin(), histProfitsF.end());
@@ -34,8 +48,12 @@ void Graph::makePlot(){
     ui->returnsGraph->replot();
 }
 
-
-
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this destructor is invoked it simply deletes the UI component.
+ */
 Graph::~Graph()
 {
     delete ui;
