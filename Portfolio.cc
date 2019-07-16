@@ -7,11 +7,13 @@
 #include "Portfolio.h"
 #include "Exception.h"
 #include "json.hpp"
+#include <algorithm>
 
 using json = nlohmann::json;
 using namespace std;
 
 Portfolio::Portfolio(): profit{0.0} {}
+
 //Portfolio(json&);
 void Portfolio::addShares(string stockName, int numShares, float currentStockValue){
   auto it = stocksPurchased.find(stockName);
@@ -51,6 +53,11 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     }
     // save previous transaction profit
     historicalProfits.push_back(profit);
+    // push_back to min and max heap -> to store the max and min profits for the graph
+    profitsMaxHeap.push_back(profit);
+    push_heap(profitsMaxHeap.begin(), profitsMaxHeap.end());
+    profitsMinHeap.push_back(profit);
+    push_heap(profitsMinHeap.begin(), profitsMinHeap.end(), greater<int>());
     // add the transaction profit
     profit += (numShares*currentStockValue) - (float(numShares)/float(oldNumShares))*oldBookValue;
   }
@@ -143,3 +150,10 @@ json Portfolio::serialize() const {
   return portfolioJson;
 }
 
+float Portfolio::getMaxProfit(){
+  return profitsMaxHeap.front();
+}
+
+float Portfolio::getMinProfit(){
+  return profitsMinHeap.front();
+}

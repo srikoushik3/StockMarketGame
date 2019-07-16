@@ -115,3 +115,11 @@ json GameRun::saveGameForAllStocks(){
   // call save game for stocks
   return stockManager->saveGameForAllStocks();
 }
+
+float GameRun::getMaxProfit(){
+  return userManager->getMaxProfit(getTurn());
+}
+
+float GameRun::getMinProfit(){
+  return userManager->getMinProfit(getTurn());
+}

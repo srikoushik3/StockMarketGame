@@ -77,3 +77,11 @@ json User::serialize() const {
   userJson["portfolio"] = portfolio.serialize();
   return userJson;
 }
+
+float User::getMaxProfit(){
+  return portfolio.getMaxProfit();
+}
+
+float User::getMinProfit(){
+  return portfolio.getMinProfit();
+}

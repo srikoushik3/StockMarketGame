@@ -1,6 +1,6 @@
  /*
   * File: User.h
-  * 
+  *
   * Date: Spring 2019
   * Summary of File:
   *   This file contains code for the User class which contains the username
@@ -35,6 +35,8 @@ class User {
     float getProfits();
     std::vector<float> getHistoricalProfits();
     json serialize() const;
+    float getMaxProfit();
+    float getMinProfit();
     ~User();
 };
 
