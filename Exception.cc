@@ -3,17 +3,38 @@
 
 using namespace std;
 
-// Define e.what() in the StockException Class by returning private string
+/* 
+ * Parameters   : None
+ * Return Value : constant pointer to char
+ * Description  : 
+ *    Since we want the exception to throw a string that explains the
+ *    cause of the exception, when this method is invoked it will simply
+ *    return the private string str.
+ */
 const char* StockException::what() {
     return str;
 }
 
-// Define e.what() in the UserException Class by returning private string
+/* 
+ * Parameters   : None
+ * Return Value : constant pointer to char
+ * Description  : 
+ *    Since we want the exception to throw a string that explains the
+ *    cause of the exception, when this method is invoked it will simply
+ *    return the private string str.
+ */
 const char* UserException::what() {
     return str;
 }
 
-// Define e.what() in the FileIOException Class by returning private string
+/* 
+ * Parameters   : None
+ * Return Value : constant pointer to char
+ * Description  : 
+ *    Since we want the exception to throw a string that explains the
+ *    cause of the exception, when this method is invoked it will simply
+ *    return the private string str.
+ */
 const char* FileIOException::what() {
     return str;
 }

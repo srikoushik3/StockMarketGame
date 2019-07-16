@@ -9,13 +9,24 @@
 using json = nlohmann::json;
 using namespace std;
 
-// Produces seed only once when new instance of Stock class is made
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this contructor is invoked it produces a seed only once when
+ *    new instance of Stock class is made.
+ */
 Stock::Stock() {
   srand(unsigned(time(NULL)));
 }
 
-// buyShares is called by buyShares in StockManager Class
-// Removes the stocks bought from the number of stocks available
+/* 
+ * Parameters   : Integer for number of shares purchased
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it simply removes the number of stocks
+ *    bought from the total number of stocks available for purchase.
+ */
 void Stock::buyShares(int numSharesPurchased) {
   if (numShares - numSharesPurchased >= 0) {
     numShares -= numSharesPurchased;
@@ -24,40 +35,69 @@ void Stock::buyShares(int numSharesPurchased) {
   }
 }
 
-// sellShares is called by sellShares in StockManager Class
-// Adds the stocks sold to the number of stocks available
+/* 
+ * Parameters   : Integer for number of shares sold
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it simply adds the number of stocks
+ *    sold to the total number of stocks available.
+ */
 void Stock::sellShares(int numSharesSold) {
   numShares += numSharesSold;
 }
 
-// hasSufficentShares is called by hasSufficentShares in StockManager Class
-// Checks to see if user is trying to buy more than what is available
+/* 
+ * Parameters   : Integer for number of shares to be bought
+ * Return Value : Boolean type
+ * Description  : 
+ *    When this method is invoked it checks to see if user is trying
+ *    to buy more than what is available.
+ */
 bool Stock::hasSufficentShares(int numSharesToBePurchased) {
   return (numShares - numSharesToBePurchased < 0) ? false : true;
 }
 
-// setEODStockPrice is called by setEODStockPrices in StockManager Class
-// Uses Variance to calculate the Stock price when user proceeds to next trading day
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it uses Variance to calculate the
+ *    Stock price when user proceeds to next trading day.
+ */
 void Stock::setEODStockPrice() {
   openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Float type
+ * Description  : 
+ *    When this method is invoked it simply returns the opening price
+ *    per share after setting the end of day share price.
+ */
 float Stock::getEODStockPrice(){
   return openingPricePerShare;
 }
 
 Stock::~Stock() {}
 
-/*
-  Expected JSON Input:
-  {
-    'numberOfShares': <int>
-    'marketCap': <float>
-    'name': <string>,
-    'openingPricePerShare': <float>,
-    'maxPriceVariance': <float>,
-  }
-*/
+/* 
+ * Parameters   : Reference to JSON
+ * Expected JSON Input:
+    {
+      'numberOfShares': <int>
+      'marketCap': <float>
+      'name': <string>,
+      'openingPricePerShare': <float>,
+      'maxPriceVariance': <float>,
+    }
+ * Return Value : None
+ * Description  : 
+ *    When this contructor is invoked it assigns various fields from JSON
+ *    to their respective member variable, via MIL. If the values do not
+ *    conform to certain validation checks, then appropriate exceptions
+ *    are thrown.
+ */
 Stock::Stock(const json& j): numShares(j["numShares"]), marketCap(j["marketCap"]), name(j["name"]),
 openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVariance"]){
   srand(unsigned(time(NULL)));
@@ -74,16 +114,22 @@ openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVar
   if(maxPriceVariance < 0) throw StockException{"Variance Cannot Be Negative"};
 }
 
-/*
-  Expected JSON Output:
-  {
-    'numberOfShares': <int>
-    'marketCap': <float>
-    'name': <string>,
-    'openingPricePerShare': <float>,
-    'maxPriceVariance': <float>,
-  }
-*/
+/* 
+ * Parameters   : None
+ * Return Value : JSON type
+ * Expected JSON Output:
+    {
+      'numberOfShares': <int>
+      'marketCap': <float>
+      'name': <string>,
+      'openingPricePerShare': <float>,
+      'maxPriceVariance': <float>,
+    }
+ * Description  : 
+ *    When this method is invoked it builds the JSON object by assigning
+ *    various member variables to their respective JSON fields, then
+ *    returns this object.
+ */
 json Stock::serialize() const {
   json stockJson = {
   {"numShares", numShares},

@@ -9,13 +9,25 @@
 using json = nlohmann::json;
 using namespace std;
 
-// change the initial cash balance
+/* 
+ * Parameters   : String for user name
+ * Return Value : None
+ * Description  : 
+ *    When this contructor is invoked it sets user name and cash balance, via MIL.
+ */
 User::User(string username): username{username}, cashBalance{1000} {}
 
 User::~User(){}
 
+/* 
+ * Parameters   : String for stock name, integer for number of shares and float for current stock value
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it subtracts the stock purchase cost from
+ *    cash balance, if the stock purchase cost is less than or equal to cash
+ *    balance. Else it throws an exception.
+ */
 void User::addShares(string stockName, int numShares, float currentStockValue){
-  // subtract the stock purchase cost from cash balance
   if (numShares*currentStockValue <= cashBalance){
     cashBalance -= numShares*currentStockValue;
     portfolio.addShares(stockName, numShares, currentStockValue);
@@ -26,32 +38,80 @@ void User::addShares(string stockName, int numShares, float currentStockValue){
   }
 }
 
+/* 
+ * Parameters   : String for stock name, integer for number of shares and float for current stock value
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it adds the stock sale cost to the
+ *    cash balance and calls the removeShares method to update the number
+ *    of stocks available for that particular stock.
+ */
 void User::removeShares(string stockName, int numShares, float currentStockValue){
-  // add the money received to the cash balance
   cashBalance += numShares*currentStockValue;
   portfolio.removeShares(stockName, numShares, currentStockValue);
 }
 
+/* 
+ * Parameters   : Float for total dividends
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it updates cash balance by adding the
+ *    total dividends to the cash balance.
+ */
 void User::addDividends(float totalDividends){
   cashBalance += totalDividends;
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it simply returns the user portfolio object.
+ */
 Portfolio User::getPortfolio(){
   return portfolio;
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Map between string and 2-tuple of integer and float
+ * Description  : 
+ *    When this method is invoked it simply returns information on user
+ *    portfolio by calling the getPortfolioInfo method on the portfolio object.
+ */
 map<string, tuple<int, float>> User::getPortfolioInfo(){
   return portfolio.getPortfolioInfo();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Float type
+ * Description  : 
+ *    When this method is invoked it simply returns the user cash balance.
+ */
 float User::getCashBalance(){
   return cashBalance;
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Float type
+ * Description  : 
+ *    When this method is invoked it returns the profit from user portfolio
+ *    by calling the getProfits method on the portfolio object.
+ */
 float User::getProfits(){
   return portfolio.getProfit();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Vector of float type
+ * Description  : 
+ *    When this method is invoked it returns the historical profit from user
+ *    portfolio by calling the getHistoricalProfits method on the
+ *    portfolio object.
+ */
 vector<float> User::getHistoricalProfits(){
   return portfolio.getHistoricalProfits();
 }
@@ -62,6 +122,13 @@ vector<float> User::getHistoricalProfits(){
   "cashBalance": <int>,
   "portfolio": <portfolio>
 */
+/* 
+ * Parameters   : Reference to JSON
+ * Return Value : None
+ * Description  : 
+ *    When this contructor is invoked it assigns various fields from the
+ *    JSON to user member variables, via MIL.
+ */
 User::User(const json& j) : username(j["userName"]), cashBalance(j["cashBalance"]), portfolio(Portfolio(j["portfolio"])){}
 
 /*
@@ -70,6 +137,14 @@ User::User(const json& j) : username(j["userName"]), cashBalance(j["cashBalance"
   "cashBalance": <int>,
   "portfolio": <portfolio>
 */
+/* 
+ * Parameters   : None
+ * Return Value : JSON type
+ * Description  : 
+ *    When this method is invoked it builds the JSON object by assigning
+ *    various member variables to their respective JSON fields, then
+ *    returns this object.
+ */
 json User::serialize() const {
   json userJson;
   userJson["userName"] = username;
@@ -78,10 +153,24 @@ json User::serialize() const {
   return userJson;
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Float type
+ * Description  : 
+ *    When this contructor is invoked it calls the getMaxProfit method on
+ *    the portfolio object and returns the maximum profit.
+ */
 float User::getMaxProfit(){
   return portfolio.getMaxProfit();
 }
 
+/* 
+ * Parameters   : None
+ * Return Value : Float type
+ * Description  : 
+ *    When this contructor is invoked it calls the getMinProfit method on
+ *    the portfolio object and returns the minimum profit.
+ */
 float User::getMinProfit(){
   return portfolio.getMinProfit();
 }

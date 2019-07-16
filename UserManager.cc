@@ -12,16 +12,29 @@ using namespace std;
 
 UserManager::UserManager(){}
 
+/* 
+ * Parameters   : Vector of strings
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it iterates through the vector of user names
+ *    and calls the addUser method on each user name to add them to the map.
+ */
 void UserManager::createUsersFromUsername(vector<string> usernames){
   for(int i = 0; i<usernames.size(); ++i){
     addUser(usernames[i]);
   }
 }
 
+/* 
+ * Parameters   : Strings for user name
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it checks if the user name can be found
+ *    in the map. If yes, then it throws an excepton. Else, it maps the user
+ *    name to a unique pointer to a User object.
+ */
 void UserManager::addUser(string username){
-  // if User DNE -> add user
   if(users.find(username) == users.end()){
-    // new user
     users.insert(make_pair(username, make_unique<User>(username)));
   }
   else{
@@ -30,11 +43,16 @@ void UserManager::addUser(string username){
   }
 }
 
+/* 
+ * Parameters   : String for stock name, string for user name, integer for number of shares and float for current stock value
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it checks if the user name can be found in
+ *    the map. If yes, then calls the addShares on the User object to update
+ *    number of stocks. Else, it throws an exception.
+ */
 void UserManager::addShares(string stockName, string username, int numShares, float currentStockValue){
-  // add shares to the user with the username provided
-
   if(users.find(username) != users.end()){
-    // valid user
     users[username]->addShares(stockName, numShares, currentStockValue);
   }
   else{
@@ -43,10 +61,16 @@ void UserManager::addShares(string stockName, string username, int numShares, fl
   }
 }
 
+/* 
+ * Parameters   : String for stock name, string for user name, integer for number of shares and float for current stock value
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it checks if the user name can be found in
+ *    the map. If yes, then calls the removeShares on the User object to update
+ *    number of stocks. Else, it throws an exception.
+ */
 void UserManager::removeShares(string stockName, string username, int numShares, float currentStockValue){
-  // remove shares to the user with the username provided
   if(users.find(username) != users.end()){
-    // valid user
     users[username]->removeShares(stockName, numShares, currentStockValue);
   }
   else{
@@ -65,6 +89,13 @@ vector<User> UserManager::getUsers(){
 }
 */
 
+/* 
+ * Parameters   : None
+ * Return Value : Vector of stings
+ * Description  : 
+ *    When this method is invoked it iterates through the user map and
+ *    pushes each user names in to a vector and return this.
+ */
 vector<string> UserManager::getUsernames(){
   vector<string> usernamesToReturn;
   for(auto& it: users){
@@ -73,9 +104,16 @@ vector<string> UserManager::getUsernames(){
   return usernamesToReturn;
 };
 
+/* 
+ * Parameters   : Float for total dividend and string for user name
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the addDividends method on the
+ *    User object to update the number of dividends. Else, it throws exception.
+ */
 void UserManager::addDividendsToUser(float totalDividends, string username){
   if(users.find(username) != users.end()){
-    // valid user
     users[username]->addDividends(totalDividends);
   }
   else{
@@ -84,9 +122,16 @@ void UserManager::addDividendsToUser(float totalDividends, string username){
   }
 }
 
+/* 
+ * Parameters   : String for user name
+ * Return Value : Map between string and 2-tuple of integer and float
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the getPortfolioInfo method on the
+ *    User object to retrieve user portfolio. Else, it throws an exception.
+ */
 map<string, tuple<int, float>> UserManager::getUserPortfolioInfo(string username){
   if(users.find(username) != users.end()){
-    // valid user
     return users[username]->getPortfolioInfo();
   }
   else{
@@ -95,9 +140,16 @@ map<string, tuple<int, float>> UserManager::getUserPortfolioInfo(string username
   }
 }
 
+/* 
+ * Parameters   : String for user name
+ * Return Value : Float type
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the getCashBalance method on the
+ *    User object to retrieve user cash balance. Else, it throws an exception.
+ */
 float UserManager::getUserCashBalance(string username){
   if(users.find(username) != users.end()){
-    // valid user
     return users[username]->getCashBalance();
   }
   else{
@@ -106,9 +158,16 @@ float UserManager::getUserCashBalance(string username){
   }
 }
 
+/* 
+ * Parameters   : String for user name
+ * Return Value : Float type
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the getProfits method on the
+ *    User object to retrieve user profit. Else, it throws an exception.
+ */
 float UserManager::getUserProfits(string username){
   if(users.find(username) != users.end()){
-    // valid user
     return users[username]->getProfits();
   }
   else{
@@ -117,9 +176,17 @@ float UserManager::getUserProfits(string username){
   }
 }
 
+/* 
+ * Parameters   : String for user name
+ * Return Value : Vector of float type
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the getHistoricalProfits method
+ *    on the User object to retrieve user's historical profit. Else, it throws
+ *    an exception.
+ */
 vector<float> UserManager::getHistoricalUserProfits(string username){
   if(users.find(username) != users.end()){
-    // valid user
     return users[username]->getHistoricalProfits();
   }
   else{
@@ -128,8 +195,14 @@ vector<float> UserManager::getHistoricalUserProfits(string username){
   }
 }
 
-// Called when game is saved.
-// Iterates through all users in map and stores information into JSON file
+/* 
+ * Parameters   : None
+ * Return Value : JSON type
+ * Description  : 
+ *    When this method is invoked it iterates over user map and emplaces
+ *    the JSON returned upon calling the serialize method on the User object
+ *    into a JSON array and return this JSON.
+ */
 json UserManager::saveGameForAllUsers() const{
   json finalJson = json::array();
   for(auto& it : users) {
@@ -138,8 +211,14 @@ json UserManager::saveGameForAllUsers() const{
   return finalJson;
 }
 
-// Called when game needs to be loaded.
-// Iterates through all fields in the JSON file and inserts information to users map
+/* 
+ * Parameters   : Reference to JSON
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it iterates over the JOSN objects and
+ *    assigns the user name fields to user name variable and inserts a unique
+ *    pointer to the JSON User object into the user map.
+ */
 void UserManager::loadUsersFromFile(json & usersJson) {
   for(json::iterator it = usersJson.begin(); it != usersJson.end(); ++it) {
     json currentUser = *it;
@@ -148,6 +227,15 @@ void UserManager::loadUsersFromFile(json & usersJson) {
   }
 }
 
+/* 
+ * Parameters   : Reference to JSON
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the getMaxProfit method
+ *    on the User object to retrieve maximum user profit. Else, it throws
+ *    an exception.
+ */
 float UserManager::getMaxProfit(string username){
   if(users.find(username) != users.end()){
     // valid user
@@ -159,6 +247,15 @@ float UserManager::getMaxProfit(string username){
   }
 }
 
+/* 
+ * Parameters   : Reference to JSON
+ * Return Value : None
+ * Description  : 
+ *    When this method is invoked it checks to see if the user name can be
+ *    found in the map. If yes, then it calls the getMinProfit method
+ *    on the User object to retrieve minimum user profit. Else, it throws
+ *    an exception.
+ */
 float UserManager::getMinProfit(string username){
   if(users.find(username) != users.end()){
     // valid user
