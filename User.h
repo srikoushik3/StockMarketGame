@@ -25,6 +25,8 @@ class User {
     float getProfits();
     std::vector<float> getHistoricalProfits();
     json serialize() const;
+    float getMaxProfit();
+    float getMinProfit();
     ~User();
 };
 

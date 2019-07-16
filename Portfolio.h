@@ -14,6 +14,8 @@ class Portfolio {
   std::unordered_map<std::string, std::tuple<int, float>> stocksPurchased;
   float profit;
   std::vector<float> historicalProfits;
+  std::vector<float> profitsMinHeap;
+  std::vector<float> profitsMaxHeap;
   public:
     Portfolio();
     Portfolio(const json&);
@@ -24,6 +26,8 @@ class Portfolio {
     float getProfit();
     std::vector<float> getHistoricalProfits();
     json serialize() const;
+    float getMaxProfit();
+    float getMinProfit();
 };
 
 

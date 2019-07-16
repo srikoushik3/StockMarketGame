@@ -28,6 +28,8 @@ class UserManager{
     float getUserProfits(std::string);
     std::vector<float> getHistoricalUserProfits(std::string);
     std::vector<std::string> getUsernames();
+    float getMaxProfit(std::string);
+    float getMinProfit(std::string);
     ~UserManager();
 };
 
