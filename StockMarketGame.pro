@@ -7,7 +7,7 @@ TARGET = StockMarketGame
 INCLUDEPATH += .
 
 # Input
-QT += widgets
+QT += widgets printsupport
 HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
     User.h Portfolio.h \
     UserManager.h \
@@ -19,7 +19,9 @@ HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
     GameStateManager.h \
     MainWindow.h \
     NewGameState.h \
-    NewGameUI.h
+    NewGameUI.h \
+    qcustomplot.h \
+    Graph.h
 SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
     main.cc \
     User.cc Portfolio.cc \
@@ -32,8 +34,11 @@ SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
     Decorator.cc \
     MainWindow.cc \
     NewGameState.cc \
-    NewGameUI.cc
+    NewGameUI.cc \
+    qcustomplot.cpp \
+    Graph.cc
 FORMS += \
     GamerunUI.ui \
     MainWindow.ui \
-    NewGameUI.ui
+    NewGameUI.ui \
+    Graph.ui

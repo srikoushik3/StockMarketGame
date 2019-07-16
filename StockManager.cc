@@ -35,6 +35,7 @@ void StockManager::buyShares(int numShares, string stockName) {
         // throw StockDoesNotExistException
         throw StockException{"Stock Does Not Exist"};
     }
+
 }
 
 // Search for stock in map and call sellShares function on that stock

@@ -1,18 +1,41 @@
 [
     {
-        "userName": "CS247",
-        "cashBalance": 999999,
-        "portfolio":{
-            "profit": 123,
-            "stocks":[]
-        }
+        "cashBalance": 1000951.25,
+        "portfolio": {
+            "profit": 124.75457763671875,
+            "stocks": [
+                {
+                    "bookValue": 145.55999755859375,
+                    "numShares": 12,
+                    "stockName": "Apple"
+                },
+                {
+                    "bookValue": 145.55999755859375,
+                    "numShares": 12,
+                    "stockName": "FB"
+                }
+            ],
+	    "avgProfitHistory":[1.2,1.3,1.4,-1.5,1.7,3,-2,14,-12,13]
+        },
+        "userName": "CS247"
     },
     {
-      "userName": "CS247-A",
-      "cashBalance": 999999,
-      "portfolio":{
-          "profit": 1.234,
-          "stocks":[]
-      }
+        "cashBalance": 1000043.1875,
+        "portfolio": {
+            "profit": 1.2339999675750732,
+            "stocks": [
+                {
+                    "bookValue": 48.79323959350586,
+                    "numShares": 4,
+                    "stockName": "Apple"
+                },
+                {
+                    "bookValue": 50.213233947753906,
+                    "numShares": 4,
+                    "stockName": "GOOGL"
+                }
+            ]
+        },
+        "userName": "CS247-A"
     }
 ]
