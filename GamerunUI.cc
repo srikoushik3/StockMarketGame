@@ -1,5 +1,6 @@
 #include "GamerunUI.h"
 #include "ui_GamerunUI.h"
+#include "Graph.h"
 #include <iostream>
 #include <vector>
 #include <QInputDialog>
@@ -152,4 +153,11 @@ void gamerun::on_saveGameBtn_clicked()
     }catch(...){
         QMessageBox::information(this, tr("Error"), tr("Could not Save Game"));
     }
+}
+
+void gamerun::on_profitHistoryBtn_clicked()
+{
+    Graph profitHistory(gsm);
+    profitHistory.setModal(true);
+    profitHistory.exec();
 }

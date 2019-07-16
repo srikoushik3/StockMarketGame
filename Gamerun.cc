@@ -103,7 +103,7 @@ tuple<string, float, float, int> GameRun::getCurrentUserInformation(){
 vector<float> GameRun::getHistoricalUserProfits(){
   // note: this method will return the historical profits as per the transaction number
   string usernameOfCurrentPlayer = getTurn();
-  userManager->getHistoricalUserProfits(usernameOfCurrentPlayer);
+  return userManager->getHistoricalUserProfits(usernameOfCurrentPlayer);
 }
 
 json GameRun::saveGameForUsers(){

@@ -103,6 +103,10 @@ Portfolio::Portfolio(const json& j) : profit(j["profit"]){
     tuple<int, float> x = make_tuple(currentStock["numShares"], currentStock["bookValue"]);
     stocksPurchased[stockName] = x;
   }
+  json histAvg = j["avgProfitHistory"];
+  for(json::iterator it = histAvg.begin(); it != histAvg.end(); ++it){
+      historicalProfits.emplace_back(*it);
+  }
 }
 
 /*
@@ -119,8 +123,12 @@ Portfolio::Portfolio(const json& j) : profit(j["profit"]){
 json Portfolio::serialize() const {
   json stock;
   json stocksArray = json::array();
+  json avgProfits = json::array();
   int numShares = 0;
   float bookValue = 0.0;
+  for(float f: historicalProfits){
+      avgProfits.emplace_back(f);
+  }
   for(auto& it: stocksPurchased){
     stock["stockName"] = it.first;
     tie(numShares, bookValue) = it.second;
@@ -130,6 +138,7 @@ json Portfolio::serialize() const {
   }
   json portfolioJson = {
       {"profit", profit},
+      {"avgProfitHistory", avgProfits},
       {"stocks", stocksArray}};
   return portfolioJson;
 }
