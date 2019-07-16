@@ -1,3 +1,13 @@
+ /*
+  * File: NewGameUI.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the NewGameFileManager class which inherits from
+  *   the QDialog Class and is responsible for allowing users to enter their game
+  *   settings, such as number of players and total number of days, in the event
+  *   that they choose to start a new game.
+  */
 #ifndef NEWGAMEFILEMANAGER_H
 #define NEWGAMEFILEMANAGER_H
 
