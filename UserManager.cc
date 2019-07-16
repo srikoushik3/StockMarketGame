@@ -148,4 +148,26 @@ void UserManager::loadUsersFromFile(json & usersJson) {
   }
 }
 
+float UserManager::getMaxProfit(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getMaxProfit();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
+float UserManager::getMinProfit(string username){
+  if(users.find(username) != users.end()){
+    // valid user
+    return users[username]->getMinProfit();
+  }
+  else{
+    // throw UserDoesNotExistException
+    throw UserException{"User Does Not Exist"};
+  }
+}
+
 UserManager::~UserManager(){}

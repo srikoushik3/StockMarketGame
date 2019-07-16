@@ -1,6 +1,6 @@
  /*
   * File: GameRun.h
-  * 
+  *
   * Date: Spring 2019
   * Summary of File:
   *   This file contains code for the GameRun class which inherit from
@@ -49,6 +49,8 @@ class GameRun: public Decorator{
     std::vector<std::string> getAllAvailableStocks();
     json saveGameForUsers();
     json saveGameForAllStocks();
+    float getMaxProfit();
+    float getMinProfit();
     ~GameRun() {}
 };
 
