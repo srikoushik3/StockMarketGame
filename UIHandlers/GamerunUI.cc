@@ -5,7 +5,7 @@
 #include <vector>
 #include <QInputDialog>
 #include <QMessageBox>
-#include "Exception.h"
+#include "Exceptions/Exception.h"
 #include <sstream>
 #include <fstream>
 #include <iomanip>

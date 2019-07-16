@@ -12,8 +12,8 @@
 #define GAMERUN_H
 
 #include <QDialog>
-#include "GameStateManager.h"
-#include "Gamerun.h"
+#include "Managers/GameStateManager.h"
+#include "Managers/Gamerun.h"
 #include <memory>
 
 namespace Ui {

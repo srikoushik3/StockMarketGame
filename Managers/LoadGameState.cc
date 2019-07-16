@@ -1,10 +1,10 @@
 #include <string>
 #include <fstream>
 #include "LoadGameState.h"
-#include "StockManager.h"
-#include "UserManager.h"
-#include "json.hpp"
-#include "Exception.h"
+#include "ADTs/StockManager.h"
+#include "ADTs/UserManager.h"
+#include "libs/json.hpp"
+#include "Exceptions/Exception.h"
 
 using json = nlohmann::json;
 using namespace std;

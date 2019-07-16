@@ -8,37 +8,53 @@ INCLUDEPATH += .
 
 # Input
 QT += widgets printsupport
-HEADERS += BasicStock.h Bond.h json.hpp Stock.h StockManager.h \
-    User.h Portfolio.h \
-    UserManager.h \
-    Gamerun.h \
-    LoadGameState.h Exception.h \
-    Decorator.h \
-    GamerunUI.h \
-    GameStateBase.h \
-    GameStateManager.h \
-    MainWindow.h \
-    NewGameState.h \
-    NewGameUI.h \
-    qcustomplot.h \
-    Graph.h
-SOURCES += BasicStock.cc Bond.cc Stock.cc StockManager.cc \
-    main.cc \
-    User.cc Portfolio.cc \
-    UserManager.cc \
-    Gamerun.cc \
-    Exception.cc LoadGameState.cc \
-    GamerunUI.cc \
-    GameStateBase.cc \
-    GameStateManager.cc \
-    Decorator.cc \
-    MainWindow.cc \
-    NewGameState.cc \
-    NewGameUI.cc \
-    qcustomplot.cpp \
-    Graph.cc
+
 FORMS += \
-    GamerunUI.ui \
-    MainWindow.ui \
-    NewGameUI.ui \
-    Graph.ui
+    UIComponents/GamerunUI.ui \
+    UIComponents/Graph.ui \
+    UIComponents/MainWindow.ui \
+    UIComponents/NewGameUI.ui
+
+HEADERS += \
+    ADTs/BasicStock.h \
+    ADTs/Bond.h \
+    ADTs/Portfolio.h \
+    ADTs/Stock.h \
+    ADTs/StockManager.h \
+    ADTs/User.h \
+    ADTs/UserManager.h \
+    Exceptions/Exception.h \
+    libs/json.hpp \
+    libs/qcustomplot.h \
+    Managers/Decorator.h \
+    Managers/Gamerun.h \
+    Managers/GameStateBase.h \
+    Managers/GameStateManager.h \
+    Managers/LoadGameState.h \
+    Managers/NewGameState.h \
+    UIHandlers/GamerunUI.h \
+    UIHandlers/Graph.h \
+    UIHandlers/MainWindow.h \
+    UIHandlers/NewGameUI.h
+
+SOURCES += \
+    ADTs/BasicStock.cc \
+    ADTs/Bond.cc \
+    ADTs/Portfolio.cc \
+    ADTs/Stock.cc \
+    ADTs/StockManager.cc \
+    ADTs/User.cc \
+    ADTs/UserManager.cc \
+    Exceptions/Exception.cc \
+    libs/qcustomplot.cpp \
+    Managers/Decorator.cc \
+    Managers/Gamerun.cc \
+    Managers/GameStateBase.cc \
+    Managers/GameStateManager.cc \
+    Managers/LoadGameState.cc \
+    Managers/NewGameState.cc \
+    UIHandlers/GamerunUI.cc \
+    UIHandlers/Graph.cc \
+    UIHandlers/MainWindow.cc \
+    UIHandlers/NewGameUI.cc \
+    main.cc

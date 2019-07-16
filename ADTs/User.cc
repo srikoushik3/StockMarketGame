@@ -3,8 +3,8 @@
 #include "Portfolio.h"
 #include <string>
 #include <iostream>
-#include "Exception.h"
-#include "json.hpp"
+#include "Exceptions/Exception.h"
+#include "libs/json.hpp"
 
 using json = nlohmann::json;
 using namespace std;

@@ -11,7 +11,7 @@
 #define GRAPH_H
 
 #include <QDialog>
-#include "Gamerun.h"
+#include "Managers/Gamerun.h"
 #include <memory>
 
 namespace Ui {

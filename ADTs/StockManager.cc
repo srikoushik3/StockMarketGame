@@ -5,8 +5,8 @@
 #include "StockManager.h"
 #include "BasicStock.h"
 #include "Bond.h"
-#include "json.hpp"
-#include "Exception.h"
+#include "libs/json.hpp"
+#include "Exceptions/Exception.h"
 
 using json = nlohmann::json;
 using namespace std;

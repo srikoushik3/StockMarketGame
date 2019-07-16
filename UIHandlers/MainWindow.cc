@@ -1,8 +1,8 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "GameStateBase.h"
+#include "Managers/GameStateBase.h"
 #include "NewGameUI.h"
-#include "LoadGameState.h"
+#include "Managers/LoadGameState.h"
 #include "GamerunUI.h"
 #include <memory>
 #include <fstream>

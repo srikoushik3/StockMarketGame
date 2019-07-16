@@ -1,13 +1,13 @@
 #include "NewGameUI.h"
 #include "ui_NewGameUI.h"
-#include "GameStateManager.h"
+#include "Managers/GameStateManager.h"
 #include <fstream>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <memory>
 #include <sstream>
-#include "json.hpp"
+#include "libs/json.hpp"
 #include "GamerunUI.h"
 
 using json = nlohmann::json;

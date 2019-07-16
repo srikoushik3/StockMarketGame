@@ -1,5 +1,5 @@
 #include "Graph.h"
-#include "Gamerun.h"
+#include "Managers/Gamerun.h"
 #include <iostream>
 #include <memory>
 #include "ui_Graph.h"
