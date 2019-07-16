@@ -1,3 +1,14 @@
+ /*
+  * File: Exception.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the StockException, UserException and
+  *   FileIOException classes which inherit from the standard exception
+  *   Class and handle any exception thrown in the other game modules
+  *   by returning a string that explains the cause of the exception when
+  *   the 'what' method is invoked.
+  */
 #ifndef EXCEPTION_H_
 #define EXCEPTION_H_
 #include <string>

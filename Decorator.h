@@ -1,3 +1,13 @@
+ /*
+  * File: Decorator.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the Decorator class which inherits 
+  *   from the GameStateManager Class and implements the Decorator 
+  *   pattern to navigate between the various game states. It contains
+  *   a shared pointer to GameStateManager and a Constructor.
+  */
 #ifndef DECORATOR_H
 #define DECORATOR_H
 

@@ -1,3 +1,13 @@
+ /*
+  * File: User.h
+  * 
+  * Date: Spring 2019
+  * Summary of File:
+  *   This file contains code for the User class which contains the username
+  *   and an instance of the user portfolio. Consequently, it is responsible
+  *   for functionalities such as add shares to and remove shares from
+  *   specific user portfolio and get various user portfolio information.
+  */
 #ifndef USER_H
 #define USER_H
 #include "Portfolio.h"
