@@ -29,6 +29,11 @@ gamerun::gamerun(shared_ptr<GameStateManager> gsm, int daysPerTurn, int totalDay
     ui->setupUi(this);
     ui->buySellLbl->setText("");
     updateStockDropdown();
+    this->gsm->attach(this);
+    this->render();
+}
+
+void gamerun::render(){
     updateUserInformation();
     updateUserStockTable();
 }
@@ -120,6 +125,7 @@ void gamerun::updateUserInformation(){
 gamerun::~gamerun()
 {
     delete ui;
+    this->gsm->detach(this);
 }
 
 /* 
@@ -162,8 +168,6 @@ void gamerun::on_buySubmitBtn_clicked()
         QMessageBox::information(this, tr("Error"), tr(e.what()));
         return;
     }
-    updateUserInformation();
-    updateUserStockTable();
     QMessageBox::information(this, tr("Success"), tr("Success!"));
 }
 
@@ -194,8 +198,6 @@ void gamerun::on_sellSubmitBtn_clicked()
         QMessageBox::information(this, tr("Error"), tr(e.what()));
         return;
     }
-    updateUserInformation();
-    updateUserStockTable();
     QMessageBox::information(this, tr("Success"), tr("Success!"));
 }
 
@@ -211,8 +213,6 @@ void gamerun::on_sellSubmitBtn_clicked()
 void gamerun::on_skipBtn_clicked()
 {
     gsm->skipNextDayForCurrentUser();
-    updateUserInformation();
-    updateUserStockTable();
 }
 
 /* 

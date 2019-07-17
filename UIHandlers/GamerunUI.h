@@ -14,18 +14,20 @@
 #include <QDialog>
 #include "Managers/GameStateManager.h"
 #include "Managers/Gamerun.h"
+#include "Observer.h"
 #include <memory>
 
 namespace Ui {
 class gamerun;
 }
 
-class gamerun : public QDialog
+class gamerun : public QDialog, public Observer
 {
     Q_OBJECT
 
 public:
     explicit gamerun(std::shared_ptr<GameStateManager>, int, int, QWidget *parent = 0);
+    void render() override;
     ~gamerun();
 
 private slots:
