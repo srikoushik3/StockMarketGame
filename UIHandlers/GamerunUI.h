@@ -41,6 +41,8 @@ private slots:
     void on_saveGameBtn_clicked();    
     void on_profitHistoryBtn_clicked();
 
+    void on_exitBtn_clicked();
+
 private:
     Ui::gamerun *ui;
     std::string stockName;

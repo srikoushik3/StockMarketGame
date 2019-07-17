@@ -1,5 +1,32 @@
 [
     {
+        "cashBalance": 1277.7796630859375,
+        "portfolio": {
+            "avgProfitHistory": [
+                12.0,
+                -11.0,
+                10.0,
+                9.0,
+                8.0,
+                -1.0,
+                15.0,
+                16.0,
+                -17.0,
+                0.0,
+                0.09201812744140625
+            ],
+            "profit": 108.0920181274414,
+            "stocks": [
+                {
+                    "bookValue": 47.19715881347656,
+                    "numShares": 4,
+                    "stockName": "Apple"
+                }
+            ]
+        },
+        "userName": "shisheer"
+    },
+    {
         "cashBalance": 1044.022705078125,
         "portfolio": {
             "avgProfitHistory": [
@@ -41,31 +68,5 @@
             "stocks": []
         },
         "userName": "sri"
-    },
-    {
-        "cashBalance": 1066.2664794921875,
-        "portfolio": {
-            "avgProfitHistory": [
-                12.0,
-                -11.0,
-                10.0,
-                9.0,
-                8.0,
-                -1.0,
-                15.0,
-                16.0,
-                -17.0,
-                0.0
-            ],
-            "profit": 0.09201812744140625,
-            "stocks": [
-                {
-                    "bookValue": 47.19715881347656,
-                    "numShares": 4,
-                    "stockName": "Apple"
-                }
-            ]
-        },
-        "userName": "shisheer"
     }
 ]
