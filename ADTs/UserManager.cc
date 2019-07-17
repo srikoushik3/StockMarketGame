@@ -20,7 +20,7 @@ UserManager::UserManager(){}
  *    and calls the addUser method on each user name to add them to the map.
  */
 void UserManager::createUsersFromUsername(vector<string> usernames){
-  for(int i = 0; i<usernames.size(); ++i){
+  for(size_t i = 0; i<usernames.size(); ++i){
     addUser(usernames[i]);
   }
 }

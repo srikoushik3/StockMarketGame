@@ -67,7 +67,9 @@ SOURCES       = ADTs/BasicStock.cc \
 		UIHandlers/Graph.cc \
 		UIHandlers/MainWindow.cc \
 		UIHandlers/NewGameUI.cc \
-		main.cc moc_qcustomplot.cpp \
+		main.cc \
+		Managers/Subject.cc \
+		UIHandlers/Observer.cc moc_qcustomplot.cpp \
 		moc_GamerunUI.cpp \
 		moc_Graph.cpp \
 		moc_MainWindow.cpp \
@@ -92,6 +94,8 @@ OBJECTS       = BasicStock.o \
 		MainWindow.o \
 		NewGameUI.o \
 		main.o \
+		Subject.o \
+		Observer.o \
 		moc_qcustomplot.o \
 		moc_GamerunUI.o \
 		moc_Graph.o \
@@ -205,7 +209,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		UIHandlers/GamerunUI.h \
 		UIHandlers/Graph.h \
 		UIHandlers/MainWindow.h \
-		UIHandlers/NewGameUI.h ADTs/BasicStock.cc \
+		UIHandlers/NewGameUI.h \
+		UIHandlers/Observer.h \
+		Managers/Subject.h ADTs/BasicStock.cc \
 		ADTs/Bond.cc \
 		ADTs/Portfolio.cc \
 		ADTs/Stock.cc \
@@ -224,7 +230,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		UIHandlers/Graph.cc \
 		UIHandlers/MainWindow.cc \
 		UIHandlers/NewGameUI.cc \
-		main.cc
+		main.cc \
+		Managers/Subject.cc \
+		UIHandlers/Observer.cc
 QMAKE_TARGET  = StockMarketGame
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = StockMarketGame
@@ -458,8 +466,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ADTs/BasicStock.h ADTs/Bond.h ADTs/Portfolio.h ADTs/Stock.h ADTs/StockManager.h ADTs/User.h ADTs/UserManager.h Exceptions/Exception.h libs/json.hpp libs/qcustomplot.h Managers/Decorator.h Managers/Gamerun.h Managers/GameStateBase.h Managers/GameStateManager.h Managers/LoadGameState.h Managers/NewGameState.h UIHandlers/GamerunUI.h UIHandlers/Graph.h UIHandlers/MainWindow.h UIHandlers/NewGameUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents ADTs/BasicStock.cc ADTs/Bond.cc ADTs/Portfolio.cc ADTs/Stock.cc ADTs/StockManager.cc ADTs/User.cc ADTs/UserManager.cc Exceptions/Exception.cc libs/qcustomplot.cpp Managers/Decorator.cc Managers/Gamerun.cc Managers/GameStateBase.cc Managers/GameStateManager.cc Managers/LoadGameState.cc Managers/NewGameState.cc UIHandlers/GamerunUI.cc UIHandlers/Graph.cc UIHandlers/MainWindow.cc UIHandlers/NewGameUI.cc main.cc $(DISTDIR)/
+	$(COPY_FILE) --parents ADTs/BasicStock.h ADTs/Bond.h ADTs/Portfolio.h ADTs/Stock.h ADTs/StockManager.h ADTs/User.h ADTs/UserManager.h Exceptions/Exception.h libs/json.hpp libs/qcustomplot.h Managers/Decorator.h Managers/Gamerun.h Managers/GameStateBase.h Managers/GameStateManager.h Managers/LoadGameState.h Managers/NewGameState.h UIHandlers/GamerunUI.h UIHandlers/Graph.h UIHandlers/MainWindow.h UIHandlers/NewGameUI.h UIHandlers/Observer.h Managers/Subject.h $(DISTDIR)/
+	$(COPY_FILE) --parents ADTs/BasicStock.cc ADTs/Bond.cc ADTs/Portfolio.cc ADTs/Stock.cc ADTs/StockManager.cc ADTs/User.cc ADTs/UserManager.cc Exceptions/Exception.cc libs/qcustomplot.cpp Managers/Decorator.cc Managers/Gamerun.cc Managers/GameStateBase.cc Managers/GameStateManager.cc Managers/LoadGameState.cc Managers/NewGameState.cc UIHandlers/GamerunUI.cc UIHandlers/Graph.cc UIHandlers/MainWindow.cc UIHandlers/NewGameUI.cc main.cc Managers/Subject.cc UIHandlers/Observer.cc $(DISTDIR)/
 	$(COPY_FILE) --parents UIComponents/GamerunUI.ui UIComponents/Graph.ui UIComponents/MainWindow.ui UIComponents/NewGameUI.ui $(DISTDIR)/
 
 
@@ -498,6 +506,8 @@ moc_GamerunUI.cpp: Managers/GameStateManager.h \
 		ADTs/Stock.h \
 		Managers/Gamerun.h \
 		Managers/Decorator.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h \
 		UIHandlers/GamerunUI.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nimwijetunga/Documents/StockMarketGame -I/home/nimwijetunga/Documents/StockMarketGame -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include UIHandlers/GamerunUI.h -o moc_GamerunUI.cpp
 
@@ -510,6 +520,8 @@ moc_Graph.cpp: Managers/Gamerun.h \
 		libs/json.hpp \
 		ADTs/StockManager.h \
 		ADTs/Stock.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h \
 		UIHandlers/Graph.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/nimwijetunga/Documents/StockMarketGame -I/home/nimwijetunga/Documents/StockMarketGame -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include UIHandlers/Graph.h -o moc_Graph.cpp
 
@@ -621,7 +633,9 @@ Gamerun.o: Managers/Gamerun.cc Managers/Decorator.h \
 		libs/json.hpp \
 		ADTs/StockManager.h \
 		ADTs/Stock.h \
-		Managers/Gamerun.h
+		Managers/Gamerun.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Gamerun.o Managers/Gamerun.cc
 
 GameStateBase.o: Managers/GameStateBase.cc Managers/GameStateBase.h \
@@ -676,6 +690,8 @@ GamerunUI.o: UIHandlers/GamerunUI.cc UIHandlers/GamerunUI.h \
 		ADTs/Stock.h \
 		Managers/Gamerun.h \
 		Managers/Decorator.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h \
 		ui_GamerunUI.h \
 		UIHandlers/Graph.h \
 		Exceptions/Exception.h
@@ -691,6 +707,8 @@ Graph.o: UIHandlers/Graph.cc UIHandlers/Graph.h \
 		libs/json.hpp \
 		ADTs/StockManager.h \
 		ADTs/Stock.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h \
 		ui_Graph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Graph.o UIHandlers/Graph.cc
 
@@ -709,7 +727,9 @@ MainWindow.o: UIHandlers/MainWindow.cc UIHandlers/MainWindow.h \
 		Managers/Decorator.h \
 		Managers/LoadGameState.h \
 		UIHandlers/GamerunUI.h \
-		Managers/Gamerun.h
+		Managers/Gamerun.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o UIHandlers/MainWindow.cc
 
 NewGameUI.o: UIHandlers/NewGameUI.cc UIHandlers/NewGameUI.h \
@@ -724,11 +744,20 @@ NewGameUI.o: UIHandlers/NewGameUI.cc UIHandlers/NewGameUI.h \
 		ADTs/Stock.h \
 		ui_NewGameUI.h \
 		UIHandlers/GamerunUI.h \
-		Managers/Gamerun.h
+		Managers/Gamerun.h \
+		Managers/Subject.h \
+		UIHandlers/Observer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NewGameUI.o UIHandlers/NewGameUI.cc
 
 main.o: main.cc UIHandlers/MainWindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cc
+
+Subject.o: Managers/Subject.cc Managers/Subject.h \
+		UIHandlers/Observer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Subject.o Managers/Subject.cc
+
+Observer.o: UIHandlers/Observer.cc UIHandlers/Observer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Observer.o UIHandlers/Observer.cc
 
 moc_qcustomplot.o: moc_qcustomplot.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qcustomplot.o moc_qcustomplot.cpp

@@ -1,11 +1,20 @@
 [
     {
+        "dividendPerShare": 1.232300043106079,
+        "isBond": true,
+        "marketCap": 1000,
+        "maxPriceVariance": 0.12999999523162842,
+        "name": "FB",
+        "numShares": 88,
+        "openingPricePerShare": 12.468611717224121
+    },
+    {
         "isBond": false,
         "marketCap": 1000,
         "maxPriceVariance": 0.12999999523162842,
         "name": "GOOGL",
-        "numShares": 93,
-        "openingPricePerShare": 13.968445777893066
+        "numShares": 96,
+        "openingPricePerShare": 14.343483924865723
     },
     {
         "dividendPerShare": 1.232300043106079,
@@ -14,15 +23,6 @@
         "maxPriceVariance": 0.12999999523162842,
         "name": "Apple",
         "numShares": 80,
-        "openingPricePerShare": 12.277303695678711
-    },
-    {
-        "dividendPerShare": 1.232300043106079,
-        "isBond": true,
-        "marketCap": 1000,
-        "maxPriceVariance": 0.12999999523162842,
-        "name": "FB",
-        "numShares": 83,
-        "openingPricePerShare": 12.304055213928223
+        "openingPricePerShare": 12.180048942565918
     }
 ]
