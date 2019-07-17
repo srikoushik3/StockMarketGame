@@ -5,8 +5,8 @@
 #include <utility>
 #include <iostream>
 #include "Portfolio.h"
-#include "Exception.h"
-#include "json.hpp"
+#include "Exceptions/Exception.h"
+#include "libs/json.hpp"
 #include <algorithm>
 
 using json = nlohmann::json;

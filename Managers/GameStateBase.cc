@@ -1,6 +1,6 @@
 #include "GameStateBase.h"
-#include "UserManager.h"
-#include "StockManager.h"
+#include "ADTs/UserManager.h"
+#include "ADTs/StockManager.h"
 #include <memory>
 
 using namespace std;

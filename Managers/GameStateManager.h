@@ -11,8 +11,8 @@
 #ifndef GAMESTATEMANAGER_H
 #define GAMESTATEMANAGER_H
 
-#include "UserManager.h"
-#include "StockManager.h"
+#include "ADTs/UserManager.h"
+#include "ADTs/StockManager.h"
 #include <memory>
 
 

@@ -1,41 +1,80 @@
 [
     {
-        "cashBalance": 1000951.25,
+        "cashBalance": 899.681396484375,
         "portfolio": {
-            "profit": 124.75457763671875,
-            "stocks": [
-                {
-                    "bookValue": 145.55999755859375,
-                    "numShares": 12,
-                    "stockName": "Apple"
-                },
-                {
-                    "bookValue": 145.55999755859375,
-                    "numShares": 12,
-                    "stockName": "FB"
-                }
+            "avgProfitHistory": [
+                10.0,
+                9.0,
+                8.0,
+                7.0,
+                6.0,
+                -1.0,
+                3.0,
+                4.0,
+                -6.0,
+                0.0
             ],
-	    "avgProfitHistory":[1.2,1.3,1.4,-1.5,1.7,3,-2,14,-12,13]
-        },
-        "userName": "CS247"
-    },
-    {
-        "cashBalance": 1000043.1875,
-        "portfolio": {
-            "profit": 1.2339999675750732,
+            "profit": -0.9312591552734375,
             "stocks": [
                 {
-                    "bookValue": 48.79323959350586,
-                    "numShares": 4,
-                    "stockName": "Apple"
+                    "bookValue": 61.5202751159668,
+                    "numShares": 5,
+                    "stockName": "FB"
                 },
                 {
-                    "bookValue": 50.213233947753906,
-                    "numShares": 4,
+                    "bookValue": 37.867103576660156,
+                    "numShares": 3,
                     "stockName": "GOOGL"
                 }
             ]
         },
-        "userName": "CS247-A"
+        "userName": "sri"
+    },
+    {
+        "cashBalance": 1066.2664794921875,
+        "portfolio": {
+            "avgProfitHistory": [
+                12.0,
+                -11.0,
+                10.0,
+                9.0,
+                8.0,
+                -1.0,
+                15.0,
+                16.0,
+                -17.0,
+                0.0
+            ],
+            "profit": 0.09201812744140625,
+            "stocks": [
+                {
+                    "bookValue": 47.19715881347656,
+                    "numShares": 4,
+                    "stockName": "Apple"
+                }
+            ]
+        },
+        "userName": "shisheer"
+    },
+    {
+        "cashBalance": 1044.022705078125,
+        "portfolio": {
+            "avgProfitHistory": [
+                1.0,
+                2.0,
+                3.0,
+                4.0,
+                5.0,
+                6.0,
+                -10.0,
+                11.0,
+                2.0,
+                -1.0,
+                0.0
+            ],
+            "profit": -0.340118408203125,
+            "stocks": []
+        },
+        "userName": "nim"
     }
 ]
