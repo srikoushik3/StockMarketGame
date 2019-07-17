@@ -13,29 +13,29 @@ using namespace std;
 UserManager::UserManager(){}
 
 /* 
- * Parameters   : Vector of strings
+ * Parameters   : Vector of strings, Average Stock Value
  * Return Value : None
  * Description  : 
  *    When this method is invoked it iterates through the vector of user names
  *    and calls the addUser method on each user name to add them to the map.
  */
-void UserManager::createUsersFromUsername(vector<string> usernames){
+void UserManager::createUsersFromUsername(vector<string> usernames, float avgSharePrice){
   for(size_t i = 0; i<usernames.size(); ++i){
-    addUser(usernames[i]);
+    addUser(usernames[i], avgSharePrice);
   }
 }
 
 /* 
- * Parameters   : Strings for user name
+ * Parameters   : Strings for user name, Average Stock Value
  * Return Value : None
  * Description  : 
  *    When this method is invoked it checks if the user name can be found
  *    in the map. If yes, then it throws an excepton. Else, it maps the user
  *    name to a unique pointer to a User object.
  */
-void UserManager::addUser(string username){
+void UserManager::addUser(string username, float avgSharePrice){
   if(users.find(username) == users.end()){
-    users.insert(make_pair(username, make_unique<User>(username)));
+    users.insert(make_pair(username, make_unique<User>(username, avgSharePrice)));
   }
   else{
     // throw DuplicateUsername exception

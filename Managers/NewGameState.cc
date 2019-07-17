@@ -26,6 +26,12 @@ void NewGameState::createStocksFromFile(json & stocks) {
     this->stockManager->loadStocksFromFile(stocks);
 }
 
+void NewGameState::initalizeGame(json & stocks, vector<string> usernames){
+    this->createStocksFromFile(stocks);
+    float avgSharePrice = this->stockManager->getAvgSharePrice();
+    this->createUsers(usernames, avgSharePrice);
+}
+
 /* 
  * Parameters   : Vector of strings
  * Return Value : None
@@ -34,6 +40,6 @@ void NewGameState::createStocksFromFile(json & stocks) {
  *    createUsersFromUsername under userManager, by passing this vector as parameter,
  *    to read in user from the vector.
  */
-void NewGameState::createUsers(vector<string> usernames){
-    this->userManager->createUsersFromUsername(usernames);
+void NewGameState::createUsers(vector<string> usernames, float avgSharePrice){
+    this->userManager->createUsersFromUsername(usernames, avgSharePrice);
 }

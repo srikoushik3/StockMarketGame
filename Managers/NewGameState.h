@@ -22,9 +22,11 @@ class NewGameState: public Decorator
 {
 public:
     NewGameState(std::shared_ptr<GameStateManager>);
-    void createStocksFromFile(json &);
-    void createUsers(std::vector<std::string>);
+    void initalizeGame(json &, std::vector<std::string>);
     ~NewGameState(){}
+private:
+    void createStocksFromFile(json &);
+    void createUsers(std::vector<std::string>, float);
 };
 
 #endif // NEWGAMESTATE_H

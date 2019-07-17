@@ -15,7 +15,7 @@ using namespace std;
  * Description  : 
  *    When this contructor is invoked it sets user name and cash balance, via MIL.
  */
-User::User(string username): username{username}, cashBalance{1000} {}
+User::User(string username, float avgSharePrice): username{username}, cashBalance{avgSharePrice * 50} {}
 
 User::~User(){}
 
