@@ -65,7 +65,13 @@ bool Stock::hasSufficentShares(int numSharesToBePurchased) {
  *    Stock price when user proceeds to next trading day.
  */
 void Stock::setEODStockPrice() {
-  openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
+    if(fluctuations.size() <= 0){
+        openingPricePerShare += (float)rand()/(RAND_MAX)*(2*maxPriceVariance)-maxPriceVariance;
+    }else {
+        int range = (fluctuations.size() - 1) + 1;
+        int index = rand() % range;
+        openingPricePerShare += fluctuations.at(index);
+    }
 }
 
 /* 
@@ -101,6 +107,10 @@ Stock::~Stock() {}
 Stock::Stock(const json& j): numShares(j["numShares"]), marketCap(j["marketCap"]), name(j["name"]),
 openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVariance"]){
   srand(unsigned(time(NULL)));
+  json stockFluctuations = j["stockFluctuations"];
+  for(json::iterator it = stockFluctuations.begin(); it != stockFluctuations.end(); ++it){
+    this->fluctuations.emplace_back(*it);
+  }
   // numShares: positive and int
   if(numShares < 0) throw StockException{"Number of Shares Cannot Be Negative"};
   if (typeid(numShares).name() != typeid(int).name()) throw StockException{"Number of Shares Must Be an Integer"};
