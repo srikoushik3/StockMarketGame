@@ -12,6 +12,7 @@
 #ifndef STOCK_H_
 #define STOCK_H_
 #include <string>
+#include <vector>
 #include "libs/json.hpp"
 
 using json = nlohmann::json;
@@ -22,6 +23,7 @@ class Stock{
     std::string name;
     float openingPricePerShare;
     float maxPriceVariance;
+    std::vector<float> fluctuations;
 
   public:
     Stock();
