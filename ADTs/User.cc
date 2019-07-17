@@ -129,7 +129,7 @@ vector<float> User::getHistoricalProfits(){
  *    When this contructor is invoked it assigns various fields from the
  *    JSON to user member variables, via MIL.
  */
-User::User(const json& j) : username(j["userName"]), cashBalance(j["cashBalance"]), portfolio(Portfolio(j["portfolio"])){}
+User::User(const json& j) : username(j["userName"]), portfolio(Portfolio(j["portfolio"])), cashBalance(j["cashBalance"]){}
 
 /*
   Expected JSON Output:

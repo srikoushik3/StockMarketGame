@@ -11,4 +11,4 @@ using namespace std;
  *    and calls the GameStateManager constuctor by passing in the shared
  *    pointer to GameStateManager, via MIL.
  */
-Decorator::Decorator(shared_ptr<GameStateManager> gsm): gsm(gsm), GameStateManager(gsm){}
+Decorator::Decorator(shared_ptr<GameStateManager> gsm): GameStateManager(gsm), gsm(gsm){}
