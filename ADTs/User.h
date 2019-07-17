@@ -23,9 +23,8 @@ class User {
   Portfolio portfolio;
   float cashBalance;
   public:
-    User(std::string);
+    User(std::string, float);
     Portfolio getPortfolio();
-    // saveUserState();
     User(const json&);
     void addShares(std::string, int, float);
     void removeShares(std::string, int, float);

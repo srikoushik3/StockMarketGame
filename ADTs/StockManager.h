@@ -29,6 +29,7 @@ class StockManager {
     float getEODStockPrice(std::string);
     bool hasSufficentShares(int numShares, std::string stockName);
     void loadStocksFromFile(json &);
+    float getAvgSharePrice();
     json saveGameForAllStocks() const;
     std::vector<std::string> getAllAvailableStocks();
     float getEODReturns(std::string stockName);

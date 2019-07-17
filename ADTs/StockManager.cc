@@ -11,20 +11,6 @@
 using json = nlohmann::json;
 using namespace std;
 
-/*
-void StockManager::addStock(int numShares, int marketCap, string name, float openingPrice, float maxPriceVariation) {
-    // if Stock DNE -> add stock
-    if(stocks.find(name) == stocks.end()){
-        // new stock
-        stocks.insert(make_pair(name, make_unique<Stock>(numShares, marketCap, name, openingPrice, maxPriceVariation)));
-    }
-    else{
-        // throw DuplicateStock exception
-        throw StockException{"Stock Already Exists"};
-    }
-}
-*/
-
 /* 
  * Parameters   : Integer for number of shares and string for stock name
  * Return Value : None
@@ -149,6 +135,23 @@ void StockManager::loadStocksFromFile(json & stocksJson) {
       stocks[stockName] = std::make_unique<BasicStock>(currentStock);
     }
   }
+}
+
+/*
+ * Parameters   : None
+ * Return Value : Average Share Price accross all stocks
+ * Description  :
+ *    Calculate the average share price accross all stocks
+ *    in the map
+ */
+float StockManager::getAvgSharePrice(){
+    int count = 0;
+    float sum = 0;
+    for(auto& it: stocks){
+        count++;
+        sum += it.second->getEODStockPrice();
+    }
+    return sum/count;
 }
 
 /* 

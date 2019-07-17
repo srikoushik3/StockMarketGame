@@ -125,8 +125,7 @@ void NewGameFileManager::on_submitBtn_clicked()
         std::ifstream ifs(stocksFileName);
         json stocksJson;
         ifs >> stocksJson;
-        this->gsm->createStocksFromFile(stocksJson);
-        this->gsm->createUsers(usernames);
+        this->gsm->initalizeGame(stocksJson, usernames);
         gamerun gr(gsm, daysPerTurn, totalDays);
         this->hide();
         gr.setModal(true);

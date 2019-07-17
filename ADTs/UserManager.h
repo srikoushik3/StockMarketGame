@@ -23,7 +23,7 @@ using json = nlohmann::json;
 class UserManager{
   // map of username to ptr to User objects
   std::unordered_map<std::string, std::unique_ptr<User>> users;
-  void addUser(std::string);
+  void addUser(std::string, float);
   public:
     UserManager();
     //void removeUser(std::string);
@@ -32,7 +32,7 @@ class UserManager{
     void addShares(std::string, std::string, int, float);
     void removeShares(std::string, std::string, int, float);
     std::vector<User> getUsers();
-    void createUsersFromUsername(std::vector<std::string>);
+    void createUsersFromUsername(std::vector<std::string>, float);
     void addDividendsToUser(float, std::string);
     std::map<std::string, std::tuple<int, float>> getUserPortfolioInfo(std::string);
     float getUserCashBalance(std::string);
