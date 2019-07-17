@@ -37,7 +37,9 @@ HEADERS += \
     UIHandlers/GamerunUI.h \
     UIHandlers/Graph.h \
     UIHandlers/MainWindow.h \
-    UIHandlers/NewGameUI.h
+    UIHandlers/NewGameUI.h \
+    UIHandlers/Observer.h \
+    Managers/Subject.h
 
 SOURCES += \
     ADTs/BasicStock.cc \
@@ -59,4 +61,6 @@ SOURCES += \
     UIHandlers/Graph.cc \
     UIHandlers/MainWindow.cc \
     UIHandlers/NewGameUI.cc \
-    main.cc
+    main.cc \
+    Managers/Subject.cc \
+    UIHandlers/Observer.cc

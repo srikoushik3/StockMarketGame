@@ -52,6 +52,7 @@ void GameRun::buyStockCurrentUser(int numShares, string stockName){
   string usernameOfCurrentPlayer = getTurn();
   float currentStockValue = stockManager->getEODStockPrice(stockName);
   userManager->addShares(stockName, usernameOfCurrentPlayer, numShares, currentStockValue);
+  this->notifyRender();
 }
 
 /* 
@@ -70,6 +71,7 @@ void GameRun::sellStockCurrentUser(int numShares, string stockName){
   string usernameOfCurrentPlayer = getTurn();
   float currentStockValue = stockManager->getEODStockPrice(stockName);
   userManager->removeShares(stockName, usernameOfCurrentPlayer, numShares, currentStockValue);
+  this->notifyRender();
 }
 
 /* 
@@ -151,6 +153,7 @@ void GameRun::skipNextDayForCurrentUser(){
   userManager->addDividendsToUser(totalDividends, usernameOfCurrentPlayer);
 
   stockManager->setEODStockPrices();
+  this->notifyRender();
 }
 
 /* 

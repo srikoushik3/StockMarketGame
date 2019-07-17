@@ -16,6 +16,7 @@
 
 #include "Decorator.h"
 #include "GameStateManager.h"
+#include "Subject.h"
 #include <memory>
 #include <string>
 #include <tuple>
@@ -31,7 +32,7 @@
 +getCurrentUserInformation(): User
 */
 
-class GameRun: public Decorator{
+class GameRun: public Decorator, public Subject{
   std::vector<std::string> usernames;
   int currentTurn;
   int currentDay;
