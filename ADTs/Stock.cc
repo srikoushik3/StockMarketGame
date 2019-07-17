@@ -107,13 +107,9 @@ Stock::~Stock() {}
 Stock::Stock(const json& j): numShares(j["numShares"]), marketCap(j["marketCap"]), name(j["name"]),
 openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVariance"]){
   srand(unsigned(time(NULL)));
-  try{
-      json stockFluctuations = j["stockFluctuations"];
-      for(json::iterator it = stockFluctuations.begin(); it != stockFluctuations.end(); ++it){
-        this->fluctuations.emplace_back(*it);
-      }
-  }catch(...){
-      cerr << "No Stock Fluctuations Found" << endl;
+  json stockFluctuations = j["stockFluctuations"];
+  for(json::iterator it = stockFluctuations.begin(); it != stockFluctuations.end(); ++it){
+    this->fluctuations.emplace_back(*it);
   }
   // numShares: positive and int
   if(numShares < 0) throw StockException{"Number of Shares Cannot Be Negative"};
