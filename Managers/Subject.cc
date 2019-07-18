@@ -23,3 +23,9 @@ void Subject::notifyRender() {
     ob->render();
   }
 }
+
+void Subject::notifyGameOver() {
+  for (auto ob : observers) {
+    ob->gameOver();
+  }
+}

@@ -14,6 +14,7 @@ class Subject {
   void attach(Observer *);
   void detach(Observer *);
   void notifyRender();
+  void notifyGameOver();
   virtual ~Subject()=0;
 };
 

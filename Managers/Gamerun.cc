@@ -1,6 +1,7 @@
 #include "Decorator.h"
 #include "GameStateManager.h"
 #include "Gamerun.h"
+#include "limits.h"
 #include <memory>
 #include <map>
 #include "libs/json.hpp"
@@ -33,7 +34,20 @@ string GameRun::getTurn(){
 GameRun::GameRun(std::shared_ptr<GameStateManager> g, int daysPerTurn, int totalDays): Decorator(g), daysPerTurn{daysPerTurn}, totalDays{totalDays}{
   currentDay = daysPerTurn;
   currentTurn = 0;
+  curTotalDay = 0;
   usernames = userManager->getUsernames();
+}
+
+string GameRun::getWinningPlayer(){
+    float maxProfits = LONG_MIN;
+    string winningUser = "";
+    for(string username: usernames){
+        if(this->userManager->getUserProfits(username) > maxProfits){
+            maxProfits = this->userManager->getUserProfits(username);
+            winningUser = username;
+        }
+    }
+    return winningUser;
 }
 
 /* 
@@ -138,6 +152,7 @@ map<string, tuple<int, float, float, float>> GameRun::getCurrentUserStockInfo(){
 void GameRun::skipNextDayForCurrentUser(){
   // throw exceptions if something goes wrong
   currentDay--;
+  curTotalDay++;
   if(currentDay == 0){
     currentTurn++;
     currentDay = daysPerTurn;
@@ -154,6 +169,9 @@ void GameRun::skipNextDayForCurrentUser(){
 
   stockManager->setEODStockPrices();
   this->notifyRender();
+  if(this->curTotalDay == this->totalDays){
+      this->notifyGameOver();
+  }
 }
 
 /* 

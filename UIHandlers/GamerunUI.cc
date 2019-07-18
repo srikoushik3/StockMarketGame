@@ -38,6 +38,12 @@ void gamerun::render(){
     updateUserStockTable();
 }
 
+void gamerun::gameOver(){
+    string winStr = "Game Over, Player: " + this->gsm->getWinningPlayer() + " won!";
+    QMessageBox::information(this, tr("Game Over"), QString::fromStdString(winStr));
+    QApplication::exit();
+}
+
 /* 
  * Parameters   : None
  * Return Value : None
