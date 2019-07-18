@@ -9,6 +9,7 @@
 #include <sstream>
 #include "libs/json.hpp"
 #include "GamerunUI.h"
+#include "Exceptions/Exception.h"
 
 using json = nlohmann::json;
 
@@ -125,7 +126,15 @@ void NewGameFileManager::on_submitBtn_clicked()
         std::ifstream ifs(stocksFileName);
         json stocksJson;
         ifs >> stocksJson;
-        this->gsm->initalizeGame(stocksJson, usernames);
+        try{
+            this->gsm->initalizeGame(stocksJson, usernames);
+        }catch(UserException e){
+            QMessageBox::information(this, tr("Error"), tr(e.what()));
+            return;
+        }catch(StockException e){
+            QMessageBox::information(this, tr("Error"), tr(e.what()));
+            return;
+        }
         gamerun gr(gsm, daysPerTurn, totalDays);
         this->hide();
         gr.setModal(true);
