@@ -228,6 +228,19 @@
     <string>Profit History</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="exitBtn">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>480</y>
+     <width>111</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -252,3 +252,8 @@ void gamerun::on_profitHistoryBtn_clicked()
     profitHistory.setModal(true);
     profitHistory.exec();
 }
+
+void gamerun::on_exitBtn_clicked()
+{
+    QApplication::exit();
+}
