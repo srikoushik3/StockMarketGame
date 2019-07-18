@@ -4,7 +4,7 @@
   * Date: Spring 2019
   * Summary of File:
   *   This file contains code for the UserManager class which contains an
-  *   unordered map that maps the name of stock to a pointer to 'User' object.
+  *   unordered map that maps the name of user to a pointer to 'User' object.
   *   Consequently, it is responsible for functionalities such as create user,
   *   add shares to and remove shares from specific user portfolio and get
   *   various user portfolio information.

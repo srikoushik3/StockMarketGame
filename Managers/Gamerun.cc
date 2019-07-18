@@ -3,6 +3,7 @@
 #include "Gamerun.h"
 #include "limits.h"
 #include <memory>
+#include <iostream>
 #include <map>
 #include "libs/json.hpp"
 
@@ -211,7 +212,12 @@ vector<float> GameRun::getHistoricalUserProfits(){
  *    and returns the JSON containing the saved info.
  */
 json GameRun::saveGameForUsers(){
-  return userManager->saveGameForAllUsers();
+  json userJson = userManager->saveGameForAllUsers();
+  json finalJson;
+  finalJson["users"] = userJson;
+  finalJson["daysPerTurn"] = this->daysPerTurn;
+  finalJson["totalDays"] = this->totalDays;
+  return finalJson;
 }
 
 /* 

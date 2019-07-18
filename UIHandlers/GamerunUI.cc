@@ -39,7 +39,7 @@ void gamerun::render(){
 }
 
 void gamerun::gameOver(){
-    string winStr = "Game Over, Player: " + this->gsm->getWinningPlayer() + " won!";
+    string winStr = "Game Over, player: " + this->gsm->getWinningPlayer() + " won!";
     QMessageBox::information(this, tr("Game Over"), QString::fromStdString(winStr));
     QApplication::exit();
 }
