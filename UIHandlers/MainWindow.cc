@@ -6,6 +6,7 @@
 #include "GamerunUI.h"
 #include <memory>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -68,8 +69,8 @@ void MainWindow::on_loadGameBtn_clicked()
     ifstream ufs("users.json");
     ufs >> usersJson;
     gsm->loadStocksFromFile(stocksJson);
-    gsm->loadUsersFromFile(usersJson);
-    gamerun gr(gsm, 10, 10);
+    gsm->loadUsersFromFile(usersJson["users"]);
+    gamerun gr(gsm, usersJson["daysPerTurn"], usersJson["totalDays"]);
     this->hide();
     gr.setModal(true);
     gr.exec();

@@ -82,6 +82,8 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
       // set new book value
       get<1>(it->second) = (float(get<0>(it->second))/float(oldNumShares))*oldBookValue;
     }
+    // add the transaction profit
+    profit += (numShares*currentStockValue) - (float(numShares)/float(oldNumShares))*oldBookValue;
     // save previous transaction profit
     historicalProfits.push_back(profit);
     // push_back to min and max heap -> to store the max and min profits for the graph
@@ -89,8 +91,6 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     push_heap(profitsMaxHeap.begin(), profitsMaxHeap.end());
     profitsMinHeap.push_back(profit);
     push_heap(profitsMinHeap.begin(), profitsMinHeap.end(), greater<int>());
-    // add the transaction profit
-    profit += (numShares*currentStockValue) - (float(numShares)/float(oldNumShares))*oldBookValue;
   }
   else{
     // throw StockDoesNotExistInPortfolio Exception
