@@ -141,7 +141,12 @@ openingPricePerShare(j["openingPricePerShare"]), maxPriceVariance(j["maxPriceVar
  *    returns this object.
  */
 json Stock::serialize() const {
+  json stockFluctutations = json::array();
+  for(float fluct : this->fluctuations){
+      stockFluctutations.emplace_back(fluct);
+  }
   json stockJson = {
+  {"stockFluctuations", stockFluctutations},
   {"numShares", numShares},
   {"marketCap", marketCap},
   {"name", name},

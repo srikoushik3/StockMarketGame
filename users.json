@@ -1,72 +1,86 @@
-[
-    {
-        "cashBalance": 1277.7796630859375,
-        "portfolio": {
-            "avgProfitHistory": [
-                12.0,
-                -11.0,
-                10.0,
-                9.0,
-                8.0,
-                -1.0,
-                15.0,
-                16.0,
-                -17.0,
-                0.0,
-                0.09201812744140625
-            ],
-            "profit": 108.0920181274414,
-            "stocks": [
-                {
-                    "bookValue": 47.19715881347656,
-                    "numShares": 4,
-                    "stockName": "Apple"
-                }
-            ]
+{
+    "daysPerTurn": 10,
+    "totalDays": 30,
+    "users": [
+        {
+            "cashBalance": 2216.74365234375,
+            "portfolio": {
+                "avgProfitHistory": [
+                    1.0,
+                    2.0,
+                    3.0,
+                    4.0,
+                    5.0,
+                    6.0,
+                    -10.0,
+                    11.0,
+                    2.0,
+                    -1.0,
+                    0.0,
+                    839.659912109375
+                ],
+                "profit": 839.659912109375,
+                "stocks": []
+            },
+            "userName": "nim"
         },
-        "userName": "shisheer"
-    },
-    {
-        "cashBalance": 1044.022705078125,
-        "portfolio": {
-            "avgProfitHistory": [
-                1.0,
-                2.0,
-                3.0,
-                4.0,
-                5.0,
-                6.0,
-                -10.0,
-                11.0,
-                2.0,
-                -1.0,
-                0.0
-            ],
-            "profit": -0.340118408203125,
-            "stocks": []
+        {
+            "cashBalance": 985.9423828125,
+            "portfolio": {
+                "avgProfitHistory": [
+                    10.0,
+                    9.0,
+                    8.0,
+                    7.0,
+                    6.0,
+                    -1.0,
+                    3.0,
+                    4.0,
+                    -6.0,
+                    0.0
+                ],
+                "profit": -0.9312591552734375,
+                "stocks": [
+                    {
+                        "bookValue": 61.5202751159668,
+                        "numShares": 5,
+                        "stockName": "FB"
+                    },
+                    {
+                        "bookValue": 37.867103576660156,
+                        "numShares": 3,
+                        "stockName": "GOOGL"
+                    }
+                ]
+            },
+            "userName": "sri"
         },
-        "userName": "nim"
-    },
-    {
-        "cashBalance": 1010.9227294921875,
-        "portfolio": {
-            "avgProfitHistory": [
-                10.0,
-                9.0,
-                8.0,
-                7.0,
-                6.0,
-                -1.0,
-                3.0,
-                4.0,
-                -6.0,
-                0.0,
-                -0.9312591552734375,
-                -0.4021453857421875
-            ],
-            "profit": 4.761203765869141,
-            "stocks": []
-        },
-        "userName": "sri"
-    }
-]
+        {
+            "cashBalance": 1245.100830078125,
+            "portfolio": {
+                "avgProfitHistory": [
+                    12.0,
+                    -11.0,
+                    10.0,
+                    9.0,
+                    8.0,
+                    -1.0,
+                    15.0,
+                    16.0,
+                    -17.0,
+                    0.0,
+                    0.09201812744140625
+                ],
+                "profit": -2.114501953125,
+                "stocks": [
+                    {
+                        "bookValue": 47.19715881347656,
+                        "numShares": 4,
+                        "stockName": "Apple"
+                    }
+                ]
+            },
+            "userName": "shisheer"
+        }
+    ]
+}

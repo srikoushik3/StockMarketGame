@@ -19,7 +19,14 @@ using namespace std;
  *    When this contructor is invoked it initializes profits to 0.0, via MIL.
  *    
  */
-Portfolio::Portfolio(): profit{0.0} {}
+Portfolio::Portfolio(): profit{0.0} {
+    historicalProfits.push_back(profit);
+    // push_back to min and max heap -> to store the max and min profits for the graph
+    profitsMaxHeap.push_back(profit);
+    push_heap(profitsMaxHeap.begin(), profitsMaxHeap.end());
+    profitsMinHeap.push_back(profit);
+    push_heap(profitsMinHeap.begin(), profitsMinHeap.end(), greater<int>());
+}
 
 /* 
  * Parameters   : String for stock name, integer for number of shares, float for current stock value
@@ -84,7 +91,7 @@ void Portfolio::removeShares(string stockName, int numShares, float currentStock
     }
     // add the transaction profit
     profit += (numShares*currentStockValue) - (float(numShares)/float(oldNumShares))*oldBookValue;
-    // save previous transaction profit
+    // save transaction profit
     historicalProfits.push_back(profit);
     // push_back to min and max heap -> to store the max and min profits for the graph
     profitsMaxHeap.push_back(profit);
