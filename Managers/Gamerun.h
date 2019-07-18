@@ -34,7 +34,7 @@
 
 class GameRun: public Decorator, public Subject{
   std::vector<std::string> usernames;
-  int currentTurn;
+  int currentTurn, curTotalDay;
   int currentDay;
   int daysPerTurn;
   int totalDays;
@@ -44,6 +44,7 @@ class GameRun: public Decorator, public Subject{
     void buyStockCurrentUser(int, std::string);
     void sellStockCurrentUser(int, std::string);
     void skipNextDayForCurrentUser();
+    std::string getWinningPlayer();
     std::tuple<std::string, float, float, int> getCurrentUserInformation();
     std::map<std::string, std::tuple<int, float, float, float>> getCurrentUserStockInfo();
     std::vector<float> getHistoricalUserProfits();

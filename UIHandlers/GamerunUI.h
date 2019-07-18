@@ -28,6 +28,7 @@ class gamerun : public QDialog, public Observer
 public:
     explicit gamerun(std::shared_ptr<GameStateManager>, int, int, QWidget *parent = 0);
     void render() override;
+    void gameOver() override;
     ~gamerun();
 
 private slots:
